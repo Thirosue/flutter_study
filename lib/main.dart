@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/home.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 void main() => runApp(MyApp());
@@ -11,7 +12,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: _title,
       home: Scaffold(
-        appBar: AppBar(title: const Text(_title),),
+        appBar: AppBar(
+          title: const Text(_title),
+        ),
         body: MyStateFulWidget(),
       ),
     );
@@ -31,9 +34,7 @@ class _MyStateFulWidgetState extends State<MyStateFulWidget> {
   String _email;
   String _password;
 
-  void _handlePasswordIconPressed() {
-
-  }
+  void _handlePasswordIconPressed() {}
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +51,7 @@ class _MyStateFulWidgetState extends State<MyStateFulWidget> {
                 hintText: 'メールアドレスを入力してください',
               ),
               validator: (value) {
-                if(value.isEmpty) {
+                if (value.isEmpty) {
                   return '入力してください';
                 }
                 return null;
@@ -65,12 +66,14 @@ class _MyStateFulWidgetState extends State<MyStateFulWidget> {
                 labelText: 'Password',
                 hintText: 'パスワードを入力してください',
                 suffixIcon: IconButton(
-                    onPressed: null, // TODO パスワード表示切り替え
-                    icon: Icon(_showPassword ? FontAwesomeIcons.solidEye : FontAwesomeIcons.solidEyeSlash),
-                  ),
+                  onPressed: null, // TODO パスワード表示切り替え
+                  icon: Icon(_showPassword
+                      ? FontAwesomeIcons.solidEye
+                      : FontAwesomeIcons.solidEyeSlash),
+                ),
               ),
               validator: (value) {
-                if(value.isEmpty) {
+                if (value.isEmpty) {
                   return '入力してください';
                 }
                 return null;
@@ -83,13 +86,30 @@ class _MyStateFulWidgetState extends State<MyStateFulWidget> {
               padding: const EdgeInsets.symmetric(vertical: 16),
               child: ElevatedButton(
                 onPressed: () {
-                  if(_formKey.currentState.validate()) {
+                  if (_formKey.currentState.validate()) {
                     print(_email);
                     print(_password);
+                    
+                    // TODO 戻るとエラーになる
+                    // Navigator.push(
+                    //   context,
+                    //   MaterialPageRoute(
+                    //     builder: (context) => Menu(),
+                    //   ),
+                    // );
                   }
                 },
                 child: Text('ログイン'),
               ),
+            ),
+            ElevatedButton(
+              child: Text('Open route'),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => Home()),
+                );
+              },
             ),
           ],
         ),
