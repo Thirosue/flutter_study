@@ -65,7 +65,7 @@ class _MyStateFulWidgetState extends State<MyStateFulWidget> {
                 labelText: 'Password',
                 hintText: 'パスワードを入力してください',
                 suffixIcon: IconButton(
-                    onPressed: null, // TODO
+                    onPressed: null, // TODO パスワード表示切り替え
                     icon: Icon(_showPassword ? FontAwesomeIcons.solidEye : FontAwesomeIcons.solidEyeSlash),
                   ),
               ),
