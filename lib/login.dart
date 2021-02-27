@@ -44,9 +44,7 @@ class _LoginState extends State<Login> {
                   }
                   return null;
                 },
-                onSaved: (value) {
-                  _email = value;
-                },
+                onChanged: (value) => _email = value,
               ),
               TextFormField(
                 obscureText: !_showPassword,
@@ -68,9 +66,7 @@ class _LoginState extends State<Login> {
                   }
                   return null;
                 },
-                onSaved: (value) {
-                  _password = value;
-                },
+                onChanged: (value) => _password = value,
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 16),
