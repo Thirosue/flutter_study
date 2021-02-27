@@ -1,6 +1,8 @@
-enum TabItem { booking, setting }
+import 'package:flutter/material.dart';
 
-const Map<TabItem, String> tabName = {
-  TabItem.booking: 'Booking',
-  TabItem.setting: 'Settings'
-};
+class TabItem {
+  final String title;
+  final Widget widget;
+
+  TabItem(this.title, this.widget);
+}

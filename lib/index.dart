@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/booking.dart';
 import 'package:flutter_app/settings.dart';
+import 'package:flutter_app/tab_item.dart';
 
 class Index extends StatefulWidget {
   @override
@@ -10,16 +11,10 @@ class Index extends StatefulWidget {
 class _IndexState extends State<Index> {
   int _index = 0;
   PageController _pageController;
-
-  // TODO リファクタリング
-  static List<String> _titleList = [
-    'Booking',
-    'Settings',
-  ];
-
-  static List<Widget> _pageList = [
-    Booking(),
-    Settings(),
+  
+  static List<TabItem> _tabItemList = [
+    new TabItem('Booking', Booking()),
+    new TabItem('Settings', Settings()),
   ];
 
   void _onPageChanged(int index) {
@@ -45,12 +40,12 @@ class _IndexState extends State<Index> {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        title: Text(_titleList[_index]),
+        title: Text(_tabItemList[_index].title),
       ),
       body: PageView(
         controller: _pageController,
         onPageChanged: _onPageChanged,
-        children: _pageList,
+        children: _tabItemList.map((e) => e.widget).toList(),
       ),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
