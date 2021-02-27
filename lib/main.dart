@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/home.dart';
+import 'package:flutter_app/index.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 void main() => runApp(MyApp());
@@ -89,7 +89,7 @@ class _MyStateFulWidgetState extends State<MyStateFulWidget> {
                   if (_formKey.currentState.validate()) {
                     print(_email);
                     print(_password);
-                    
+
                     // TODO 戻るとエラーになる
                     // Navigator.push(
                     //   context,
@@ -107,7 +107,7 @@ class _MyStateFulWidgetState extends State<MyStateFulWidget> {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => Home()),
+                  MaterialPageRoute(builder: (context) => Index()),
                 );
               },
             ),
