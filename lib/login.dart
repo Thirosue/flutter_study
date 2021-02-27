@@ -11,7 +11,7 @@ class _LoginState extends State<Login> {
   static const String _title = 'Login';
 
   final _formKey = GlobalKey<FormState>();
-  static const bool _showPassword = false;
+  static bool _showPassword = false;
   String _email;
   String _password;
 
@@ -50,16 +50,18 @@ class _LoginState extends State<Login> {
               ),
               TextFormField(
                 obscureText: !_showPassword,
-                decoration: const InputDecoration(
-                  labelText: 'Password',
-                  hintText: 'パスワードを入力してください',
-                  suffixIcon: IconButton(
-                    onPressed: null, // TODO パスワード表示切り替え
-                    icon: Icon(_showPassword
-                        ? FontAwesomeIcons.solidEye
-                        : FontAwesomeIcons.solidEyeSlash),
-                  ),
-                ),
+                decoration: InputDecoration(
+                    labelText: 'Password',
+                    hintText: 'パスワードを入力してください',
+                    suffixIcon: IconButton(
+                        icon: Icon(_showPassword
+                            ? FontAwesomeIcons.solidEye
+                            : FontAwesomeIcons.solidEyeSlash),
+                        onPressed: () => {
+                              setState(() {
+                                _showPassword = !_showPassword;
+                              })
+                            })),
                 validator: (value) {
                   if (value.isEmpty) {
                     return '入力してください';
