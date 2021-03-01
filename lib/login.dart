@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/dto/auth.dart';
 import 'package:flutter_app/index.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:http/http.dart' as http;
 
 class Login extends StatefulWidget {
   @override
@@ -23,11 +24,11 @@ class _LoginState extends State<Login> {
   void initState() {
     super.initState();
     print('login init');
-    _jsonFileLoad().then((value) {
-      print(value);
-      print(value.message);
-      print(value.data[0].jwt);
-    });
+    // _jsonFileLoad().then((value) {
+    //   print(value);
+    //   print(value.message);
+    //   print(value.data[0].jwt);
+    // });
   }
 
   @override
@@ -45,8 +46,8 @@ class _LoginState extends State<Login> {
             children: <Widget>[
               TextFormField(
                 decoration: const InputDecoration(
-                  labelText: 'Email',
-                  hintText: 'メールアドレスを入力してください',
+                  labelText: 'UserId',
+                  hintText: 'ユーザIDを入力してください',
                 ),
                 validator: (value) {
                   if (value.isEmpty) {
@@ -86,17 +87,21 @@ class _LoginState extends State<Login> {
                       print(_email);
                       print(_password);
 
-                      Map<String, String> headers = {
-                        'content-type': 'application/json'
-                      };
+                      auth().then((value) {
+                        print(value.message);
+                        print(value.data[0].jwt);
 
-                      // TODO 戻るとエラーになる
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(
-                      //     builder: (context) => Menu(),
-                      //   ),
-                      // );
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: const Text('ログインしました')),
+                        );
+
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => Index(),
+                          ),
+                        );
+                      });
                     }
                   },
                   child: Text('ログイン'),
@@ -118,9 +123,20 @@ class _LoginState extends State<Login> {
     );
   }
 
+  Future<Response> auth() async {
+    final response =
+        await http.get(_url, headers: {'content-type': 'application/json'});
+
+    if (response.statusCode == 200) {
+      return Response.fromJson(jsonDecode(response.body));
+    } else {
+      throw Exception('Failed to auth');
+    }
+  }
+
   // json sample
   Future<dynamic> _jsonFileLoad() async {
-    String _json = '''{
+    var _json = '''{
     "data": [
       {
         "id": "demo",
