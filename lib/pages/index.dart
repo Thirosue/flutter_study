@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/booking.dart';
-import 'package:flutter_app/settings.dart';
-import 'package:flutter_app/tab_item.dart';
+import 'package:flutter_app/dto/tab_item.dart';
+import 'package:flutter_app/pages/booking.dart';
+import 'package:flutter_app/pages/holiday.dart';
+import 'package:flutter_app/pages/settings.dart';
 
 class Index extends StatefulWidget {
   @override
@@ -11,9 +12,10 @@ class Index extends StatefulWidget {
 class _IndexState extends State<Index> {
   int _index = 0;
   PageController _pageController;
-  
+
   static List<TabItem> _tabItemList = [
     new TabItem('Booking', Booking()),
+    new TabItem('Holiday', Holiday()),
     new TabItem('Settings', Settings()),
   ];
 
@@ -50,6 +52,8 @@ class _IndexState extends State<Index> {
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(icon: Icon(Icons.schedule), label: 'Booking'),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.cake_outlined), label: 'Holiday'),
           BottomNavigationBarItem(
               icon: Icon(Icons.settings), label: 'Settings'),
         ],
