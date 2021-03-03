@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/dto/store.dart';
 import 'package:flutter_app/pages/index.dart';
 import 'package:flutter_app/services/auth.dart';
+import 'package:flutter_app/services/store.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class Login extends StatefulWidget {
+  Login({Key key, this.store}) : super(key: key);
+
+  final StoreService store;
+
   @override
   _LoginState createState() => _LoginState();
 }
@@ -19,6 +25,29 @@ class _LoginState extends State<Login> {
   void initState() {
     super.initState();
     print('login init');
+
+    widget.store.read().then((value) {
+      if (value.jwt.isNotEmpty) {
+        print('jwt stored. value: ${value.jwt}');
+        // TODO トークンリフレッシュ
+
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: const Text('自動ログインしました')),
+        );
+
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => Index(),
+          ),
+        );
+      }
+    });
+
+    // JsonConverter.storeJson().then((value) {
+    //  print(value.jwt);
+    // });
+
     // JsonConverter.jsonFileLoad().then((value) => print(value.message));
   }
 
@@ -79,12 +108,15 @@ class _LoginState extends State<Login> {
                       print(_password);
 
                       AuthService.auth().then((value) {
+                        var jwt = value.data[0].jwt;
                         print(value.message);
-                        print(value.data[0].jwt);
+                        print(jwt);
 
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(content: const Text('ログインしました')),
                         );
+
+                        widget.store.write(new Store(jwt: jwt));
 
                         Navigator.push(
                           context,
