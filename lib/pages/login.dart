@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/dto/session.dart';
 import 'package:flutter_app/dto/store.dart';
-import 'package:flutter_app/pages/index.dart';
 import 'package:flutter_app/services/auth.dart';
 import 'package:flutter_app/services/store.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
+import 'index.dart';
 
 class Login extends StatefulWidget {
   Login({Key key, this.store}) : super(key: key);
@@ -31,24 +33,22 @@ class _LoginState extends State<Login> {
         print('jwt stored. value: ${value.jwt}');
         // TODO トークンリフレッシュ
 
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: const Text('自動ログインしました')),
-        );
-
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => Index(),
-          ),
-        );
+        // ScaffoldMessenger.of(context).showSnackBar(
+        //   SnackBar(content: const Text('自動ログインしました')),
+        // );
+        //
+        // Navigator.push(
+        //   context,
+        //   MaterialPageRoute(
+        //     builder: (context) => Index(),
+        //   ),
+        // );
       }
     });
 
     // JsonConverter.storeJson().then((value) {
     //  print(value.jwt);
     // });
-
-    // JsonConverter.jsonFileLoad().then((value) => print(value.message));
   }
 
   @override
@@ -104,13 +104,13 @@ class _LoginState extends State<Login> {
                 child: ElevatedButton(
                   onPressed: () {
                     if (_formKey.currentState.validate()) {
-                      print(_id);
-                      print(_password);
+                      print("id: $_id, password: $_password");
 
                       AuthService.auth().then((value) {
-                        var jwt = value.data[0].jwt;
-                        print(value.message);
-                        print(jwt);
+                        print(value.toString());
+
+                        var session = Session.toList(value.data);
+                        var jwt = session[0].jwt;
 
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(content: const Text('ログインしました')),

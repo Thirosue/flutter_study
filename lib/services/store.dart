@@ -23,7 +23,7 @@ class StoreService {
 
       return Store.fromJson(jsonDecode(json));
     } catch (e) {
-      return new Store();
+      return new Store(jwt: null);
     }
   }
 

@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:flutter_app/dto/auth.dart';
+import 'package:flutter_app/dto/response.dart';
 import 'package:http/http.dart' as http;
 
 class AuthService {
