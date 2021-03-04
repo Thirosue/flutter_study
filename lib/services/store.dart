@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:flutter_app/dto/store.dart';
+import 'package:flutter_app/models/store.dart';
 import 'package:path_provider/path_provider.dart';
 
 class StoreService {
@@ -23,7 +23,7 @@ class StoreService {
 
       return Store.fromJson(jsonDecode(json));
     } catch (e) {
-      return new Store(jwt: null);
+      return new Store(jwt: '');
     }
   }
 

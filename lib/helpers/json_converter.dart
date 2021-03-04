@@ -1,7 +1,7 @@
 import 'dart:convert';
 
-import 'package:flutter_app/dto/response.dart';
-import 'package:flutter_app/dto/store.dart';
+import 'package:flutter_app/models/response/api_response.dart';
+import 'package:flutter_app/models/store.dart';
 
 class JsonConverter {
   // json sample
@@ -28,7 +28,7 @@ class JsonConverter {
 }
 ''';
 
-    return Response.fromJson(jsonDecode(_json));
+    return ApiResponse.fromJson(jsonDecode(_json));
   }
 
   static Future<dynamic> storeJson() async {

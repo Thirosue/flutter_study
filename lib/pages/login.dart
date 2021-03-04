@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/dto/session.dart';
-import 'package:flutter_app/dto/store.dart';
+import 'package:flutter_app/models/response/session.dart';
+import 'package:flutter_app/models/store.dart';
 import 'package:flutter_app/services/auth.dart';
 import 'package:flutter_app/services/store.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -8,8 +8,9 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'index.dart';
 
 class Login extends StatefulWidget {
-  Login({Key key, this.store}) : super(key: key);
+  Login({Key key, this.auth, this.store}) : super(key: key);
 
+  final AuthService auth;
   final StoreService store;
 
   @override
@@ -106,7 +107,7 @@ class _LoginState extends State<Login> {
                     if (_formKey.currentState.validate()) {
                       print("id: $_id, password: $_password");
 
-                      AuthService.auth().then((value) {
+                      widget.auth.auth().then((value) {
                         print(value.toString());
 
                         var session = Session.toList(value.data);

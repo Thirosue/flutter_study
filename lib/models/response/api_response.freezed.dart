@@ -1,63 +1,64 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies
 
-part of 'response.dart';
+part of 'api_response.dart';
 
 // **************************************************************************
 // FreezedGenerator
 // **************************************************************************
 
 T _$identity<T>(T value) => value;
-Response _$ResponseFromJson(Map<String, dynamic> json) {
-  return _Response.fromJson(json);
+ApiResponse _$ApiResponseFromJson(Map<String, dynamic> json) {
+  return _ApiResponse.fromJson(json);
 }
 
 /// @nodoc
-class _$ResponseTearOff {
-  const _$ResponseTearOff();
+class _$ApiResponseTearOff {
+  const _$ApiResponseTearOff();
 
 // ignore: unused_element
-  _Response call({List<dynamic> data, @required String message}) {
-    return _Response(
+  _ApiResponse call({List<dynamic> data, @required String message}) {
+    return _ApiResponse(
       data: data,
       message: message,
     );
   }
 
 // ignore: unused_element
-  Response fromJson(Map<String, Object> json) {
-    return Response.fromJson(json);
+  ApiResponse fromJson(Map<String, Object> json) {
+    return ApiResponse.fromJson(json);
   }
 }
 
 /// @nodoc
 // ignore: unused_element
-const $Response = _$ResponseTearOff();
+const $ApiResponse = _$ApiResponseTearOff();
 
 /// @nodoc
-mixin _$Response {
+mixin _$ApiResponse {
   List<dynamic> get data;
   String get message;
 
   Map<String, dynamic> toJson();
   @JsonKey(ignore: true)
-  $ResponseCopyWith<Response> get copyWith;
+  $ApiResponseCopyWith<ApiResponse> get copyWith;
 }
 
 /// @nodoc
-abstract class $ResponseCopyWith<$Res> {
-  factory $ResponseCopyWith(Response value, $Res Function(Response) then) =
-      _$ResponseCopyWithImpl<$Res>;
+abstract class $ApiResponseCopyWith<$Res> {
+  factory $ApiResponseCopyWith(
+          ApiResponse value, $Res Function(ApiResponse) then) =
+      _$ApiResponseCopyWithImpl<$Res>;
   $Res call({List<dynamic> data, String message});
 }
 
 /// @nodoc
-class _$ResponseCopyWithImpl<$Res> implements $ResponseCopyWith<$Res> {
-  _$ResponseCopyWithImpl(this._value, this._then);
+class _$ApiResponseCopyWithImpl<$Res> implements $ApiResponseCopyWith<$Res> {
+  _$ApiResponseCopyWithImpl(this._value, this._then);
 
-  final Response _value;
+  final ApiResponse _value;
   // ignore: unused_field
-  final $Res Function(Response) _then;
+  final $Res Function(ApiResponse) _then;
 
   @override
   $Res call({
@@ -72,28 +73,31 @@ class _$ResponseCopyWithImpl<$Res> implements $ResponseCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$ResponseCopyWith<$Res> implements $ResponseCopyWith<$Res> {
-  factory _$ResponseCopyWith(_Response value, $Res Function(_Response) then) =
-      __$ResponseCopyWithImpl<$Res>;
+abstract class _$ApiResponseCopyWith<$Res>
+    implements $ApiResponseCopyWith<$Res> {
+  factory _$ApiResponseCopyWith(
+          _ApiResponse value, $Res Function(_ApiResponse) then) =
+      __$ApiResponseCopyWithImpl<$Res>;
   @override
   $Res call({List<dynamic> data, String message});
 }
 
 /// @nodoc
-class __$ResponseCopyWithImpl<$Res> extends _$ResponseCopyWithImpl<$Res>
-    implements _$ResponseCopyWith<$Res> {
-  __$ResponseCopyWithImpl(_Response _value, $Res Function(_Response) _then)
-      : super(_value, (v) => _then(v as _Response));
+class __$ApiResponseCopyWithImpl<$Res> extends _$ApiResponseCopyWithImpl<$Res>
+    implements _$ApiResponseCopyWith<$Res> {
+  __$ApiResponseCopyWithImpl(
+      _ApiResponse _value, $Res Function(_ApiResponse) _then)
+      : super(_value, (v) => _then(v as _ApiResponse));
 
   @override
-  _Response get _value => super._value as _Response;
+  _ApiResponse get _value => super._value as _ApiResponse;
 
   @override
   $Res call({
     Object data = freezed,
     Object message = freezed,
   }) {
-    return _then(_Response(
+    return _then(_ApiResponse(
       data: data == freezed ? _value.data : data as List<dynamic>,
       message: message == freezed ? _value.message : message as String,
     ));
@@ -103,12 +107,12 @@ class __$ResponseCopyWithImpl<$Res> extends _$ResponseCopyWithImpl<$Res>
 @JsonSerializable()
 
 /// @nodoc
-class _$_Response with DiagnosticableTreeMixin implements _Response {
-  const _$_Response({this.data, @required this.message})
+class _$_ApiResponse with DiagnosticableTreeMixin implements _ApiResponse {
+  const _$_ApiResponse({this.data, @required this.message})
       : assert(message != null);
 
-  factory _$_Response.fromJson(Map<String, dynamic> json) =>
-      _$_$_ResponseFromJson(json);
+  factory _$_ApiResponse.fromJson(Map<String, dynamic> json) =>
+      _$_$_ApiResponseFromJson(json);
 
   @override
   final List<dynamic> data;
@@ -117,14 +121,14 @@ class _$_Response with DiagnosticableTreeMixin implements _Response {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Response(data: $data, message: $message)';
+    return 'ApiResponse(data: $data, message: $message)';
   }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('type', 'Response'))
+      ..add(DiagnosticsProperty('type', 'ApiResponse'))
       ..add(DiagnosticsProperty('data', data))
       ..add(DiagnosticsProperty('message', message));
   }
@@ -132,7 +136,7 @@ class _$_Response with DiagnosticableTreeMixin implements _Response {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _Response &&
+        (other is _ApiResponse &&
             (identical(other.data, data) ||
                 const DeepCollectionEquality().equals(other.data, data)) &&
             (identical(other.message, message) ||
@@ -147,20 +151,21 @@ class _$_Response with DiagnosticableTreeMixin implements _Response {
 
   @JsonKey(ignore: true)
   @override
-  _$ResponseCopyWith<_Response> get copyWith =>
-      __$ResponseCopyWithImpl<_Response>(this, _$identity);
+  _$ApiResponseCopyWith<_ApiResponse> get copyWith =>
+      __$ApiResponseCopyWithImpl<_ApiResponse>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$_$_ResponseToJson(this);
+    return _$_$_ApiResponseToJson(this);
   }
 }
 
-abstract class _Response implements Response {
-  const factory _Response({List<dynamic> data, @required String message}) =
-      _$_Response;
+abstract class _ApiResponse implements ApiResponse {
+  const factory _ApiResponse({List<dynamic> data, @required String message}) =
+      _$_ApiResponse;
 
-  factory _Response.fromJson(Map<String, dynamic> json) = _$_Response.fromJson;
+  factory _ApiResponse.fromJson(Map<String, dynamic> json) =
+      _$_ApiResponse.fromJson;
 
   @override
   List<dynamic> get data;
@@ -168,5 +173,5 @@ abstract class _Response implements Response {
   String get message;
   @override
   @JsonKey(ignore: true)
-  _$ResponseCopyWith<_Response> get copyWith;
+  _$ApiResponseCopyWith<_ApiResponse> get copyWith;
 }
