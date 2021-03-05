@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/pages/login.dart';
-import 'package:flutter_app/services/auth.dart';
-import 'package:flutter_app/services/store.dart';
+import 'package:flutter_app/repository/auth.dart';
+import 'package:flutter_app/repository/store.dart';
+import 'package:flutter_app/ui/login.dart';
 
 void main() => runApp(MyApp());
 
@@ -13,8 +13,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: _title,
       home: Login(
-        auth: AuthService(),
-        store: StoreService(),
+        auth: AuthRepository(),
+        store: StoreRepository(),
       ),
     );
   }

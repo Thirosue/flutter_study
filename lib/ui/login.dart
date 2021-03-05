@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/models/response/session.dart';
 import 'package:flutter_app/models/store.dart';
-import 'package:flutter_app/services/auth.dart';
-import 'package:flutter_app/services/store.dart';
+import 'package:flutter_app/repository/auth.dart';
+import 'package:flutter_app/repository/store.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'index.dart';
@@ -10,8 +10,8 @@ import 'index.dart';
 class Login extends StatefulWidget {
   Login({Key key, this.auth, this.store}) : super(key: key);
 
-  final AuthService auth;
-  final StoreService store;
+  final AuthRepository auth;
+  final StoreRepository store;
 
   @override
   _LoginState createState() => _LoginState();

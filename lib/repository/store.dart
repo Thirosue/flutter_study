@@ -4,7 +4,7 @@ import 'dart:io';
 import 'package:flutter_app/models/store.dart';
 import 'package:path_provider/path_provider.dart';
 
-class StoreService {
+class StoreRepository {
   Future<String> get _localPath async {
     final directory = await getApplicationDocumentsDirectory();
 

@@ -4,7 +4,7 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flutter_app/models/response/api_response.dart';
 
-class AuthService {
+class AuthRepository {
   static const String _baseUrl =
       'https://thirosue.github.io/hosting-image2/flutter_study';
 
