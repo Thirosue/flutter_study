@@ -8,7 +8,7 @@ class Settings extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
-        child: Text(_title),
+        child: const Text(_title),
       ),
     );
   }

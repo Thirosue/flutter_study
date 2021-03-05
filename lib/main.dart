@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/repository/auth.dart';
-import 'package:flutter_app/repository/store.dart';
-import 'package:flutter_app/ui/login.dart';
+
+import 'repository/auth.dart';
+import 'repository/store.dart';
+import 'ui/login.dart';
 
 void main() => runApp(MyApp());
 

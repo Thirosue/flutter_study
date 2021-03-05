@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/models/response/session.dart';
-import 'package:flutter_app/models/store.dart';
-import 'package:flutter_app/repository/auth.dart';
-import 'package:flutter_app/repository/store.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+import '../model/response/session.dart';
+import '../model/store.dart';
+import '../repository/auth.dart';
+import '../repository/store.dart';
 import 'index.dart';
 
 class Login extends StatefulWidget {
@@ -114,10 +114,10 @@ class _LoginState extends State<Login> {
                         var jwt = session[0].jwt;
 
                         ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(content: const Text('ログインしました')),
+                          const SnackBar(content: Text('ログインしました')),
                         );
 
-                        widget.store.write(new Store(jwt: jwt));
+                        widget.store.write(Store(jwt: jwt));
 
                         Navigator.push(
                           context,
@@ -128,7 +128,7 @@ class _LoginState extends State<Login> {
                       });
                     }
                   },
-                  child: Text('ログイン'),
+                  child: const Text('ログイン'),
                 ),
               )
             ],

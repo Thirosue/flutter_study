@@ -1,8 +1,9 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:flutter_app/models/store.dart';
 import 'package:path_provider/path_provider.dart';
+
+import '../model/store.dart';
 
 class StoreRepository {
   Future<String> get _localPath async {
@@ -22,8 +23,9 @@ class StoreRepository {
       var json = await file.readAsString();
 
       return Store.fromJson(jsonDecode(json));
-    } catch (e) {
-      return new Store(jwt: '');
+    } on Exception catch (e) {
+      print(e);
+      return const Store(jwt: '');
     }
   }
 

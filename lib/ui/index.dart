@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/models/tab_item.dart';
-import 'package:flutter_app/ui/booking.dart';
-import 'package:flutter_app/ui/holiday.dart';
-import 'package:flutter_app/ui/settings.dart';
+
+import '../model/tab_item.dart';
+import 'booking.dart';
+import 'holiday.dart';
+import 'settings.dart';
 
 class Index extends StatefulWidget {
   @override
@@ -13,10 +14,10 @@ class _IndexState extends State<Index> {
   int _index = 0;
   PageController _pageController;
 
-  static List<TabItem> _tabItemList = [
-    new TabItem('Booking', Booking()),
-    new TabItem('Holiday', Holiday()),
-    new TabItem('Settings', Settings()),
+  static final List<TabItem> _tabItemList = [
+    TabItem('Booking', Booking()),
+    TabItem('Holiday', Holiday()),
+    TabItem('Settings', Settings()),
   ];
 
   void _onPageChanged(int index) {
@@ -60,8 +61,11 @@ class _IndexState extends State<Index> {
         currentIndex: _index,
         onTap: (index) {
           _index = index;
-          _pageController.animateToPage(index,
-              duration: Duration(milliseconds: 300), curve: Curves.easeIn);
+          _pageController.animateToPage(
+            index,
+            duration: const Duration(milliseconds: 300),
+            curve: Curves.easeIn,
+          );
         },
       ),
     );

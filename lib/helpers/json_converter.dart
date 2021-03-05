@@ -1,7 +1,7 @@
 import 'dart:convert';
 
-import 'package:flutter_app/models/response/api_response.dart';
-import 'package:flutter_app/models/store.dart';
+import '../model/response/api_response.dart';
+import '../model/store.dart';
 
 class JsonConverter {
   // json sample

@@ -2,7 +2,8 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
-import 'package:flutter_app/models/response/api_response.dart';
+
+import '../model/response/api_response.dart';
 
 class AuthRepository {
   static const String _baseUrl =
