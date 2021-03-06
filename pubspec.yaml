@@ -29,10 +29,12 @@ dependencies:
   cupertino_icons: ^1.0.2
   font_awesome_flutter: ^8.11.0
   dio: ^3.0.10
+  provider: ^5.0.0
   path_provider: ^1.6.27
-  json_annotation: ^3.1.1
-  json_serializable: ^3.5.1
-  freezed: ^0.12.7
+  json_annotation: ^4.0.0
+  json_serializable: ^4.0.2
+  freezed: ^0.14.0
+  gap: ^1.2.0
 
 dev_dependencies:
   flutter_test:

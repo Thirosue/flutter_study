@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'repository/auth.dart';
 import 'repository/store.dart';
-import 'ui/login.dart';
+import 'ui/login/login.dart';
 
 void main() => runApp(MyApp());
 

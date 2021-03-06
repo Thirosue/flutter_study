@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-import '../model/tab_item.dart';
-import 'booking.dart';
-import 'holiday.dart';
-import 'settings.dart';
+import '../../model/tab_item.dart';
+import '../booking/booking.dart';
+import '../holiday/holiday.dart';
+import '../settings/settings.dart';
 
 class Index extends StatefulWidget {
   @override

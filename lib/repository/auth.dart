@@ -12,7 +12,7 @@ class AuthRepository {
   Future<ApiResponse> auth() async {
     var dio = Dio(BaseOptions(
       baseUrl: _baseUrl,
-      connectTimeout: 500000,
+      connectTimeout: 50000,
       receiveTimeout: 100000,
       // 5s
       headers: {
