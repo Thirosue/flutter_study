@@ -8,4 +8,5 @@ analyzer:
 linter:
   rules:
     public_member_api_docs: false
+    one_member_abstracts: false
     prefer_const_constructors: true

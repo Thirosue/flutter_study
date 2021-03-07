@@ -8,7 +8,12 @@ class Holiday extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
-        child: const Text(_title),
+        child: const Text(
+          _title,
+          style: TextStyle(
+            fontSize: 25,
+          ),
+        ),
       ),
     );
   }

@@ -15,6 +15,7 @@ class StoreRepositoryImpl implements StoreRepository {
 
   Future<File> get _localFile async {
     final path = await _localPath;
+    print('path: $path');
     return File('$path/store.txt');
   }
 
@@ -30,10 +31,10 @@ class StoreRepositoryImpl implements StoreRepository {
     }
   }
 
-  Future<File> write(Store values) async {
+  Future<void> write(Store values) async {
     final file = await _localFile;
     var json = values.toJson();
 
-    return file.writeAsString(jsonEncode(json));
+    await file.writeAsString(jsonEncode(json));
   }
 }
