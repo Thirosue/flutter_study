@@ -4,8 +4,9 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 
 import '../model/response/api_response.dart';
+import 'auth_repository.dart';
 
-class AuthRepository {
+class AuthRepositoryImpl implements AuthRepository {
   static const String _baseUrl =
       'https://thirosue.github.io/hosting-image2/flutter_study';
 

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'repository/auth.dart';
-import 'repository/store.dart';
+import 'repository/auth_repository_impl.dart';
+import 'repository/store_repository_impl.dart';
 import 'ui/login/login.dart';
 
 void main() => runApp(MyApp());
@@ -14,8 +14,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: _title,
       home: Login(
-        auth: AuthRepository(),
-        store: StoreRepository(),
+        auth: AuthRepositoryImpl(),
+        store: StoreRepositoryImpl(),
       ),
     );
   }

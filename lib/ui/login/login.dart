@@ -4,8 +4,8 @@ import 'package:gap/gap.dart';
 
 import '../../model/response/session.dart';
 import '../../model/store.dart';
-import '../../repository/auth.dart';
-import '../../repository/store.dart';
+import '../../repository/auth_repository.dart';
+import '../../repository/store_repository.dart';
 import '../index/index.dart';
 
 class Login extends StatefulWidget {
