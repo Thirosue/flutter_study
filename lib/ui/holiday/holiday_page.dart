@@ -1,12 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 
-class HolidayPage extends StatefulWidget {
-  @override
-  State<StatefulWidget> createState() => _HolidayApp();
-}
-
-class _HolidayApp extends State<HolidayPage> {
+class HolidayPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
