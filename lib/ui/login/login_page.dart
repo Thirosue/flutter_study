@@ -11,7 +11,7 @@ import '../component/stateful_wrapper.dart';
 import '../local_state.dart';
 import 'login_model.dart';
 
-class Login extends StatelessWidget {
+class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(

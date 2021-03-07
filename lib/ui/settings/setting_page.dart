@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class Booking extends StatelessWidget {
-  static const String _title = 'Booking';
+class SettingPage extends StatelessWidget {
+  static const String _title = 'Settings';
 
   @override
   Widget build(BuildContext context) {
