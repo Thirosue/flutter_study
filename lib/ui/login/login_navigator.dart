@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../constants.dart';
 import '../../helpers/route_navigator.dart';
-import '../index/index.dart';
 
 class LoginNavigator implements RouteNavigator {
   void next(BuildContext context, String message) {
@@ -13,11 +13,6 @@ class LoginNavigator implements RouteNavigator {
       );
     }
 
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => Index(),
-      ),
-    );
+    Navigator.pushNamed(context, Constants.index);
   }
 }
