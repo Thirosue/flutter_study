@@ -1,20 +1,17 @@
-import 'package:flutter/material.dart';
-
 import '../model/store.dart';
 import '../repository/store_repository.dart';
 
-class LocalState extends ChangeNotifier {
+class LocalState {
   final StoreRepository repository;
-
-  Store store;
+  final key = 'localState';
 
   LocalState(this.repository);
 
-  Future<Store> read() {
-    return repository.read();
+  Store read() {
+    return repository.read(key);
   }
 
-  Future<void> write(Store values) async {
-    await repository.write(values);
+  void write(Store values) {
+    repository.write(key, values);
   }
 }

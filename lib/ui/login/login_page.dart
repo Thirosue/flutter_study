@@ -21,7 +21,7 @@ class LoginPage extends StatelessWidget {
             AuthRepositoryImpl(),
           ),
         ),
-        ChangeNotifierProvider(
+        Provider(
           create: (context) => LocalState(
             StoreRepositoryImpl(),
           ),
@@ -41,13 +41,17 @@ class LoginApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StatefulWrapper(
-      onInit: () async {
-        var store = await context.read<LocalState>().read();
-        if (store.jwt.isNotEmpty) {
-          print('jwt stored. value: ${store.jwt}');
+      onInit: () {
+        try {
+          var store = context.read<LocalState>().read();
+          if (store.jwt.isNotEmpty) {
+            print('jwt stored. value: ${store.jwt}');
 
-          // TODO トークンリフレッシュ
-          // await context.read<LoginNavigator>().next(context, '自動ログインしました');
+            // TODO トークンリフレッシュ
+            // await context.read<LoginNavigator>().next(context, '自動ログインしました');
+          }
+        } on Exception catch (e) {
+          print(e);
         }
       },
       child: Scaffold(

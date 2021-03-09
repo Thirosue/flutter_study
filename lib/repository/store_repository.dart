@@ -1,7 +1,7 @@
 import '../model/store.dart';
 
 abstract class StoreRepository {
-  Future<Store> read();
+  Store read(String key);
 
-  Future<void> write(Store values);
+  void write(String key, Store values);
 }
