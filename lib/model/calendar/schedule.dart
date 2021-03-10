@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 
 class Schedule {
   Schedule({
-    this.from,
-    this.to,
-    this.subject,
-    this.background,
-    this.isAllDay,
+    required this.from,
+    required this.to,
+    required this.subject,
+    this.background = Colors.lightBlue,
+    this.isAllDay = false,
   });
 
   DateTime from;

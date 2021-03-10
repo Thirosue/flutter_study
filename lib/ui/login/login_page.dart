@@ -7,7 +7,6 @@ import '../../model/store.dart';
 import '../../repository/auth_repository_impl.dart';
 import '../../repository/store_repository_impl.dart';
 import '../../ui/login/login_navigator.dart';
-import '../component/stateful_wrapper.dart';
 import '../local_state.dart';
 import 'login_model.dart';
 
@@ -40,80 +39,64 @@ class LoginApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return StatefulWrapper(
-      onInit: () {
-        try {
-          var store = context.read<LocalState>().read();
-          if (store.jwt.isNotEmpty) {
-            print('jwt stored. value: ${store.jwt}');
-
-            // TODO トークンリフレッシュ
-            // await context.read<LoginNavigator>().next(context, '自動ログインしました');
-          }
-        } on Exception catch (e) {
-          print(e);
-        }
-      },
-      child: Scaffold(
-        body: Center(
-          child: Container(
-            padding: const EdgeInsets.all(24),
-            child: Form(
-              key: _formKey,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  TextFormField(
-                    decoration: const InputDecoration(
-                      labelText: 'UserId',
-                      hintText: 'ユーザIDを入力してください',
-                    ),
-                    validator: context.read<LoginModel>().emptyValidator,
-                    onChanged: (value) => context.read<LoginModel>().id = value,
+    return Scaffold(
+      body: Center(
+        child: Container(
+          padding: const EdgeInsets.all(24),
+          child: Form(
+            key: _formKey,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                TextFormField(
+                  decoration: const InputDecoration(
+                    labelText: 'UserId',
+                    hintText: 'ユーザIDを入力してください',
                   ),
-                  TextFormField(
-                    obscureText: !context.watch<LoginModel>().showPassword,
-                    decoration: InputDecoration(
-                      labelText: 'Password',
-                      hintText: 'パスワードを入力してください',
-                      suffixIcon: IconButton(
-                        icon: Icon(context.watch<LoginModel>().showPassword
-                            ? FontAwesomeIcons.solidEye
-                            : FontAwesomeIcons.solidEyeSlash),
-                        onPressed: () =>
-                            context.read<LoginModel>().togglePasswordVisible(),
-                      ),
+                  validator: context.read<LoginModel>().emptyValidator,
+                  onChanged: (value) => context.read<LoginModel>().id = value,
+                ),
+                TextFormField(
+                  obscureText: !context.watch<LoginModel>().showPassword,
+                  decoration: InputDecoration(
+                    labelText: 'Password',
+                    hintText: 'パスワードを入力してください',
+                    suffixIcon: IconButton(
+                      icon: Icon(context.watch<LoginModel>().showPassword
+                          ? FontAwesomeIcons.solidEye
+                          : FontAwesomeIcons.solidEyeSlash),
+                      onPressed: () =>
+                          context.read<LoginModel>().togglePasswordVisible(),
                     ),
-                    validator: context.read<LoginModel>().emptyValidator,
-                    onChanged: (value) =>
-                        context.read<LoginModel>().password = value,
                   ),
-                  const Gap(8),
-                  Container(
-                    width: double.infinity,
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 16),
-                      child: ElevatedButton(
-                        onPressed: () async {
-                          if (_formKey.currentState.validate()) {
-                            var session =
-                                await context.read<LoginModel>().auth();
+                  validator: context.read<LoginModel>().emptyValidator,
+                  onChanged: (value) =>
+                      context.read<LoginModel>().password = value,
+                ),
+                const Gap(8),
+                Container(
+                  width: double.infinity,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 16),
+                    child: ElevatedButton(
+                      onPressed: () async {
+                        if (_formKey.currentState!.validate()) {
+                          var session = await context.read<LoginModel>().auth();
 
-                            context.read<LocalState>().write(
-                                  Store(jwt: session.jwt),
-                                );
+                          context.read<LocalState>().write(
+                                Store(jwt: session.jwt),
+                              );
 
-                            await context
-                                .read<LoginNavigator>()
-                                .next(context, 'ログインしました');
-                          }
-                        },
-                        child: const Text('ログイン'),
-                      ),
+                          context
+                              .read<LoginNavigator>()
+                              .next(context, 'ログインしました');
+                        }
+                      },
+                      child: const Text('ログイン'),
                     ),
-                  )
-                ],
-              ),
+                  ),
+                )
+              ],
             ),
           ),
         ),

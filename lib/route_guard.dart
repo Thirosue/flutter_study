@@ -1,3 +1,3 @@
 abstract class RouteGuard {
-  void onInit();
+  void hook();
 }

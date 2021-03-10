@@ -12,7 +12,7 @@ class Index extends StatefulWidget {
 
 class _IndexState extends State<Index> {
   int _index = 0;
-  PageController _pageController;
+  PageController _pageController = PageController(initialPage: 0);
 
   static final List<TabItem> _tabItemList = [
     TabItem('Booking', BookingPage()),

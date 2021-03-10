@@ -18,8 +18,6 @@ class HolidayModel extends ChangeNotifier {
       from: startTime,
       to: endTime,
       subject: 'Holiday',
-      background: Colors.purpleAccent,
-      isAllDay: true,
     ));
     notifyListeners();
   }

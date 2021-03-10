@@ -16,8 +16,8 @@ class LoginModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  String emptyValidator(String value) {
-    if (value.isEmpty) {
+  String? emptyValidator(String? value) {
+    if (value == null || value.isEmpty) {
       return '入力してください';
     }
     return null;
