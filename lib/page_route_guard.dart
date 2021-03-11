@@ -1,7 +1,7 @@
-import 'package:flutter_app/repository/auth_repository_impl.dart';
 import 'package:get/get.dart';
 
 import 'constants.dart';
+import 'repository/auth_repository_impl.dart';
 import 'repository/store_repository_impl.dart';
 import 'route_guard.dart';
 import 'ui/local_state.dart';

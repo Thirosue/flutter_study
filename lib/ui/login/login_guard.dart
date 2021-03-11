@@ -1,7 +1,7 @@
-import 'package:flutter_app/helpers/message_utils.dart';
 import 'package:get/get.dart';
 
 import '../../constants.dart';
+import '../../helpers/message_utils.dart';
 import '../../model/response/session.dart';
 import '../../model/store.dart';
 import '../../repository/auth_repository.dart';
@@ -32,6 +32,7 @@ class LoginGuard extends RouteGuard {
 
       return true;
     } on Exception catch (e) {
+      print(e);
       return false;
     }
   }
