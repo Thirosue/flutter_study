@@ -84,7 +84,11 @@ class LoginApp extends StatelessWidget {
                           var session = await context.read<LoginModel>().auth();
 
                           context.read<LocalState>().write(
-                                Store(jwt: session.jwt),
+                                Store(
+                                  idToken: session.idToken,
+                                  refreshToken: session.refreshToken,
+                                  accessToken: session.accessToken,
+                                ),
                               );
 
                           context

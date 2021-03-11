@@ -16,7 +16,7 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var pageRouteGuard = Get.put(PageRouteGuard());
-    
+
     return GetMaterialApp(
       initialRoute: Constants.login,
       getPages: [

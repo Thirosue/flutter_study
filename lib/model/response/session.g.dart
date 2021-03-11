@@ -9,15 +9,17 @@ part of 'session.dart';
 _$_Session _$_$_SessionFromJson(Map<String, dynamic> json) {
   return _$_Session(
     id: json['id'] as String,
-    firstName: json['first_name'] as String,
-    lastName: json['last_name'] as String,
-    email: json['email'] as String,
-    tel: json['tel'] as String,
-    roles: (json['roles'] as List)?.map((e) => e as String)?.toList(),
-    permissionKeyList: (json['permission_key_list'] as List)
+    firstName: json['first_name'] as String?,
+    lastName: json['last_name'] as String?,
+    email: json['email'] as String?,
+    tel: json['tel'] as String?,
+    roles: (json['roles'] as List<dynamic>?)?.map((e) => e as String).toList(),
+    permissionKeyList: (json['permission_key_list'] as List<dynamic>?)
         ?.map((e) => e as String)
-        ?.toList(),
-    jwt: json['jwt'] as String,
+        .toList(),
+    idToken: json['idToken'] as String,
+    refreshToken: json['refreshToken'] as String,
+    accessToken: json['accessToken'] as String,
   );
 }
 
@@ -30,5 +32,7 @@ Map<String, dynamic> _$_$_SessionToJson(_$_Session instance) =>
       'tel': instance.tel,
       'roles': instance.roles,
       'permission_key_list': instance.permissionKeyList,
-      'jwt': instance.jwt,
+      'idToken': instance.idToken,
+      'refreshToken': instance.refreshToken,
+      'accessToken': instance.accessToken,
     };

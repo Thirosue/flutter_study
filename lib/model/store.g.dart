@@ -8,10 +8,14 @@ part of 'store.dart';
 
 _$_Store _$_$_StoreFromJson(Map<String, dynamic> json) {
   return _$_Store(
-    jwt: json['jwt'] as String,
+    idToken: json['idToken'] as String,
+    refreshToken: json['refreshToken'] as String,
+    accessToken: json['accessToken'] as String,
   );
 }
 
 Map<String, dynamic> _$_$_StoreToJson(_$_Store instance) => <String, dynamic>{
-      'jwt': instance.jwt,
+      'idToken': instance.idToken,
+      'refreshToken': instance.refreshToken,
+      'accessToken': instance.accessToken,
     };

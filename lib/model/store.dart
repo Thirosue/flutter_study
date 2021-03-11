@@ -8,7 +8,9 @@ part 'store.g.dart';
 @freezed
 abstract class Store with _$Store {
   const factory Store({
-    @required String jwt,
+    required String idToken,
+    required String refreshToken,
+    required String accessToken,
   }) = _Store;
 
   factory Store.fromJson(Map<String, dynamic> json) => _$StoreFromJson(json);

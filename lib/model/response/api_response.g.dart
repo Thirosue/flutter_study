@@ -8,7 +8,7 @@ part of 'api_response.dart';
 
 _$_ApiResponse _$_$_ApiResponseFromJson(Map<String, dynamic> json) {
   return _$_ApiResponse(
-    data: json['data'] as List,
+    data: json['data'] as List<dynamic>?,
     message: json['message'] as String,
   );
 }

@@ -8,14 +8,16 @@ part 'session.g.dart';
 @freezed
 abstract class Session with _$Session {
   const factory Session({
-    @required String id,
-    @JsonKey(name: 'first_name') String firstName,
-    @JsonKey(name: 'last_name') String lastName,
-    String email,
-    String tel,
-    List<String> roles,
-    @JsonKey(name: 'permission_key_list') List<String> permissionKeyList,
-    @required String jwt,
+    required String id,
+    @JsonKey(name: 'first_name') String? firstName,
+    @JsonKey(name: 'last_name') String? lastName,
+    String? email,
+    String? tel,
+    List<String>? roles,
+    @JsonKey(name: 'permission_key_list') List<String>? permissionKeyList,
+    required String idToken,
+    required String refreshToken,
+    required String accessToken,
   }) = _Session;
 
   static List<Session> toList(List<dynamic> json) =>

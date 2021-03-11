@@ -30,7 +30,7 @@ class LoginModel extends ChangeNotifier {
 
     print(results.toString());
 
-    var session = Session.toList(results.data);
+    var session = Session.toList(results.data!);
     return session[0];
   }
 }

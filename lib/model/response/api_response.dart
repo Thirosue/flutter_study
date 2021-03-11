@@ -8,8 +8,8 @@ part 'api_response.g.dart';
 @freezed
 abstract class ApiResponse with _$ApiResponse {
   const factory ApiResponse({
-    List data,
-    @required String message,
+    List<dynamic>? data,
+    required String message,
   }) = _ApiResponse;
 
   // static List<ApiResponse> toList(List<dynamic> json) =>

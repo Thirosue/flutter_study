@@ -1,5 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides
 
 part of 'store.dart';
 
@@ -8,6 +8,10 @@ part of 'store.dart';
 // **************************************************************************
 
 T _$identity<T>(T value) => value;
+
+final _privateConstructorUsedError = UnsupportedError(
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+
 Store _$StoreFromJson(Map<String, dynamic> json) {
   return _Store.fromJson(json);
 }
@@ -16,37 +20,41 @@ Store _$StoreFromJson(Map<String, dynamic> json) {
 class _$StoreTearOff {
   const _$StoreTearOff();
 
-// ignore: unused_element
-  _Store call({@required String jwt}) {
+  _Store call(
+      {required String idToken,
+      required String refreshToken,
+      required String accessToken}) {
     return _Store(
-      jwt: jwt,
+      idToken: idToken,
+      refreshToken: refreshToken,
+      accessToken: accessToken,
     );
   }
 
-// ignore: unused_element
   Store fromJson(Map<String, Object> json) {
     return Store.fromJson(json);
   }
 }
 
 /// @nodoc
-// ignore: unused_element
 const $Store = _$StoreTearOff();
 
 /// @nodoc
 mixin _$Store {
-  String get jwt;
+  String get idToken => throw _privateConstructorUsedError;
+  String get refreshToken => throw _privateConstructorUsedError;
+  String get accessToken => throw _privateConstructorUsedError;
 
-  Map<String, dynamic> toJson();
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $StoreCopyWith<Store> get copyWith;
+  $StoreCopyWith<Store> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $StoreCopyWith<$Res> {
   factory $StoreCopyWith(Store value, $Res Function(Store) then) =
       _$StoreCopyWithImpl<$Res>;
-  $Res call({String jwt});
+  $Res call({String idToken, String refreshToken, String accessToken});
 }
 
 /// @nodoc
@@ -59,10 +67,23 @@ class _$StoreCopyWithImpl<$Res> implements $StoreCopyWith<$Res> {
 
   @override
   $Res call({
-    Object jwt = freezed,
+    Object? idToken = freezed,
+    Object? refreshToken = freezed,
+    Object? accessToken = freezed,
   }) {
     return _then(_value.copyWith(
-      jwt: jwt == freezed ? _value.jwt : jwt as String,
+      idToken: idToken == freezed
+          ? _value.idToken
+          : idToken // ignore: cast_nullable_to_non_nullable
+              as String,
+      refreshToken: refreshToken == freezed
+          ? _value.refreshToken
+          : refreshToken // ignore: cast_nullable_to_non_nullable
+              as String,
+      accessToken: accessToken == freezed
+          ? _value.accessToken
+          : accessToken // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -72,7 +93,7 @@ abstract class _$StoreCopyWith<$Res> implements $StoreCopyWith<$Res> {
   factory _$StoreCopyWith(_Store value, $Res Function(_Store) then) =
       __$StoreCopyWithImpl<$Res>;
   @override
-  $Res call({String jwt});
+  $Res call({String idToken, String refreshToken, String accessToken});
 }
 
 /// @nodoc
@@ -86,10 +107,23 @@ class __$StoreCopyWithImpl<$Res> extends _$StoreCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object jwt = freezed,
+    Object? idToken = freezed,
+    Object? refreshToken = freezed,
+    Object? accessToken = freezed,
   }) {
     return _then(_Store(
-      jwt: jwt == freezed ? _value.jwt : jwt as String,
+      idToken: idToken == freezed
+          ? _value.idToken
+          : idToken // ignore: cast_nullable_to_non_nullable
+              as String,
+      refreshToken: refreshToken == freezed
+          ? _value.refreshToken
+          : refreshToken // ignore: cast_nullable_to_non_nullable
+              as String,
+      accessToken: accessToken == freezed
+          ? _value.accessToken
+          : accessToken // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -98,17 +132,24 @@ class __$StoreCopyWithImpl<$Res> extends _$StoreCopyWithImpl<$Res>
 
 /// @nodoc
 class _$_Store with DiagnosticableTreeMixin implements _Store {
-  const _$_Store({@required this.jwt}) : assert(jwt != null);
+  const _$_Store(
+      {required this.idToken,
+      required this.refreshToken,
+      required this.accessToken});
 
   factory _$_Store.fromJson(Map<String, dynamic> json) =>
       _$_$_StoreFromJson(json);
 
   @override
-  final String jwt;
+  final String idToken;
+  @override
+  final String refreshToken;
+  @override
+  final String accessToken;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Store(jwt: $jwt)';
+    return 'Store(idToken: $idToken, refreshToken: $refreshToken, accessToken: $accessToken)';
   }
 
   @override
@@ -116,20 +157,32 @@ class _$_Store with DiagnosticableTreeMixin implements _Store {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'Store'))
-      ..add(DiagnosticsProperty('jwt', jwt));
+      ..add(DiagnosticsProperty('idToken', idToken))
+      ..add(DiagnosticsProperty('refreshToken', refreshToken))
+      ..add(DiagnosticsProperty('accessToken', accessToken));
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is _Store &&
-            (identical(other.jwt, jwt) ||
-                const DeepCollectionEquality().equals(other.jwt, jwt)));
+            (identical(other.idToken, idToken) ||
+                const DeepCollectionEquality()
+                    .equals(other.idToken, idToken)) &&
+            (identical(other.refreshToken, refreshToken) ||
+                const DeepCollectionEquality()
+                    .equals(other.refreshToken, refreshToken)) &&
+            (identical(other.accessToken, accessToken) ||
+                const DeepCollectionEquality()
+                    .equals(other.accessToken, accessToken)));
   }
 
   @override
   int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(jwt);
+      runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(idToken) ^
+      const DeepCollectionEquality().hash(refreshToken) ^
+      const DeepCollectionEquality().hash(accessToken);
 
   @JsonKey(ignore: true)
   @override
@@ -143,13 +196,20 @@ class _$_Store with DiagnosticableTreeMixin implements _Store {
 }
 
 abstract class _Store implements Store {
-  const factory _Store({@required String jwt}) = _$_Store;
+  const factory _Store(
+      {required String idToken,
+      required String refreshToken,
+      required String accessToken}) = _$_Store;
 
   factory _Store.fromJson(Map<String, dynamic> json) = _$_Store.fromJson;
 
   @override
-  String get jwt;
+  String get idToken => throw _privateConstructorUsedError;
+  @override
+  String get refreshToken => throw _privateConstructorUsedError;
+  @override
+  String get accessToken => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$StoreCopyWith<_Store> get copyWith;
+  _$StoreCopyWith<_Store> get copyWith => throw _privateConstructorUsedError;
 }

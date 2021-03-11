@@ -1,3 +1,4 @@
+import 'package:flutter_app/repository/auth_repository_impl.dart';
 import 'package:get/get.dart';
 
 import 'constants.dart';
@@ -11,9 +12,10 @@ class PageRouteGuard extends GetxController {
 
   PageRouteGuard() {
     _pageRouteGuard[Constants.login] = LoginGuard(
-      LocalState(
+      localState: LocalState(
         StoreRepositoryImpl(),
       ),
+      auth: AuthRepositoryImpl(),
     );
   }
 

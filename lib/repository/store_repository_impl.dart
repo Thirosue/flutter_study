@@ -13,7 +13,11 @@ class StoreRepositoryImpl implements StoreRepository {
     if (json != null) {
       return Store.fromJson(jsonDecode(json));
     } else {
-      return const Store(jwt: '');
+      return const Store(
+        idToken: '',
+        refreshToken: '',
+        accessToken: '',
+      );
     }
   }
 
