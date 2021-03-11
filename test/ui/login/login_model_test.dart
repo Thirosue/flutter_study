@@ -11,6 +11,7 @@ import 'package:flutter_app/model/response/api_response.dart';
 import 'package:flutter_app/repository/auth_repository.dart';
 import 'package:flutter_app/ui/login/login_model.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mockito/mockito.dart';
 
 final _json = '''
 {
@@ -40,30 +41,13 @@ final response = ApiResponse.fromJson(
   jsonDecode(_json),
 );
 
-// class MockAuthRepository extends Mock implements AuthRepository {}
-
-class MockAuthRepository implements AuthRepository {
-  Future<ApiResponse> auth() async {
-    return response;
-  }
-
-  Future<ApiResponse> refresh() async {
-    return response;
-  }
-}
+class MockAuthRepository extends Mock implements AuthRepository {}
 
 void main() {
-  final target = LoginModel(
-    MockAuthRepository(),
-  );
-
   group('1. LoginModel auth() ', () {
     test('1-1. 認証APIが正常終了するとき、セッションの中身が正常に検証できること', () async {
       var mock = MockAuthRepository();
-
-      // when(mock.auth()).thenAnswer((_) {
-      //   return Future.value(response);
-      // });
+      when(mock.auth()).thenAnswer((_) async => Future.value(response));
 
       var model = LoginModel(mock);
       var session = await model.auth();
@@ -71,7 +55,23 @@ void main() {
       expect(session.idToken,
           "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c");
     });
+
+    test('1-2. 認証APIが異常終了するとき、例外がthrowされること', () async {
+      var mock = MockAuthRepository();
+      when(mock.auth()).thenThrow(
+        Exception(
+          ['api error occurred'],
+        ),
+      );
+
+      var model = LoginModel(mock);
+      expect(() => model.auth(), throwsException);
+    });
   });
+
+  final target = LoginModel(
+    MockAuthRepository(),
+  );
 
   group('2. LoginModel emptyValidator ', () {
     test('2-1. value が null のとき、エラー文言を返すこと', () {

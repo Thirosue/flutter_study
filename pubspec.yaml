@@ -41,7 +41,8 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  mockito: ^5.0.0
+  mockito: ^4.1.4
+  # mockito: ^5.0.0 # waiting for issue to be closed see. https://github.com/dart-lang/mockito/issues/358
 
   build_runner: ^1.11.1
 
