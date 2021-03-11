@@ -91,9 +91,7 @@ class LoginApp extends StatelessWidget {
                                 ),
                               );
 
-                          context
-                              .read<LoginNavigator>()
-                              .next(context, 'ログインしました');
+                          context.read<LoginNavigator>().next('ログインしました');
                         }
                       },
                       child: const Text('ログイン'),

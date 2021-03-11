@@ -1,3 +1,4 @@
+import 'package:flutter_app/helpers/message_utils.dart';
 import 'package:get/get.dart';
 
 import '../../constants.dart';
@@ -35,6 +36,13 @@ class LoginGuard extends RouteGuard {
     }
   }
 
+  void redirect() {
+    Get.toNamed(Constants.index);
+    if (!Get.isSnackbarOpen!) {
+      MessageUtils.showSnackBar('ログイン', '自動ログインしました');
+    }
+  }
+
   @override
   void hook() async {
     print('login onInit');
@@ -45,7 +53,9 @@ class LoginGuard extends RouteGuard {
       var result = await refreshToken();
       if (result) {
         print('token refreshed... go to index page.');
-        Get.toNamed(Constants.index); // auto login
+
+        // auto login
+        redirect();
       }
     }
   }

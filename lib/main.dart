@@ -21,11 +21,12 @@ class App extends StatelessWidget {
       initialRoute: Constants.login,
       getPages: [
         GetPage(
-            name: Constants.login,
-            page: () {
-              pageRouteGuard?.hook(Constants.login);
-              return LoginPage();
-            }),
+          name: Constants.login,
+          page: () {
+            pageRouteGuard?.hook(Constants.login);
+            return LoginPage();
+          },
+        ),
         GetPage(
           name: Constants.index,
           page: () => Index(),
