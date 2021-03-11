@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../constants.dart';
@@ -5,14 +6,13 @@ import '../../helpers/message_utils.dart';
 import '../../model/response/session.dart';
 import '../../model/store.dart';
 import '../../repository/auth_repository.dart';
-import '../../route_guard.dart';
 import '../local_state.dart';
 
-class LoginGuard extends RouteGuard {
+class LoginMiddleWare extends GetMiddleware {
   final LocalState localState;
   final AuthRepository auth;
 
-  LoginGuard({
+  LoginMiddleWare({
     required this.localState,
     required this.auth,
   });
@@ -37,7 +37,7 @@ class LoginGuard extends RouteGuard {
     }
   }
 
-  void redirect() {
+  void toIndex() {
     Get.toNamed(Constants.index);
     if (!Get.isSnackbarOpen!) {
       MessageUtils.showSnackBar('ログイン', '自動ログインしました');
@@ -45,19 +45,23 @@ class LoginGuard extends RouteGuard {
   }
 
   @override
-  void hook() async {
-    print('login onInit');
+  RouteSettings? redirect(String? route) {
+    print('login onInit. check token');
+
     var store = localState.read();
     if (store.idToken.isNotEmpty) {
       print('Refresh Token stored. value: ${store.idToken}');
 
-      var result = await refreshToken();
-      if (result) {
-        print('token refreshed... go to index page.');
+      refreshToken().then((result) {
+        if (result) {
+          print('token refreshed... go to index page.');
 
-        // auto login
-        redirect();
-      }
+          // auto login
+          toIndex();
+        }
+      });
+
+      return null;
     }
   }
 }

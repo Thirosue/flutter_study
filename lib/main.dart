@@ -3,9 +3,32 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
 import 'constants.dart';
-import 'page_route_guard.dart';
+import 'repository/auth_repository_impl.dart';
+import 'repository/store_repository_impl.dart';
 import 'ui/index/index.dart';
+import 'ui/local_state.dart';
+import 'ui/login/login_middleware.dart';
 import 'ui/login/login_page.dart';
+
+/// /////////////////////////
+/// Page Settings
+/// /////////////////////////
+
+// login page
+final loginPage = GetPage(
+  name: Constants.login,
+  page: () => LoginPage(),
+);
+
+// index page
+final indexPage = GetPage(
+  name: Constants.index,
+  page: () => Index(),
+);
+
+/// /////////////////////////
+/// main
+/// /////////////////////////
 
 void main() async {
   await GetStorage.init();
@@ -15,22 +38,20 @@ void main() async {
 class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    var pageRouteGuard = Get.put(PageRouteGuard());
+    // redirect settings
+    var loginMiddleWare = LoginMiddleWare(
+      localState: LocalState(
+        StoreRepositoryImpl(),
+      ),
+      auth: AuthRepositoryImpl(),
+    );
+    loginMiddleWare.redirect(Constants.login);
 
     return GetMaterialApp(
       initialRoute: Constants.login,
       getPages: [
-        GetPage(
-          name: Constants.login,
-          page: () {
-            pageRouteGuard?.hook(Constants.login);
-            return LoginPage();
-          },
-        ),
-        GetPage(
-          name: Constants.index,
-          page: () => Index(),
-        )
+        loginPage,
+        indexPage,
       ],
     );
   }
