@@ -38,12 +38,73 @@ class _IndexState extends State<Index> {
     super.dispose();
   }
 
+  void _next(int index) {
+    if (index != _index) {
+      _pageController.animateToPage(
+        index,
+        duration: const Duration(milliseconds: 300),
+        curve: Curves.easeIn,
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: Builder(
+          builder: (context) => IconButton(
+            icon: const Icon(Icons.menu),
+            onPressed: () {
+              Scaffold.of(context).openDrawer();
+            },
+          ),
+        ),
         automaticallyImplyLeading: false,
         title: Text(_tabItemList[_index].title),
+      ),
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: <Widget>[
+            const DrawerHeader(
+              decoration: BoxDecoration(
+                color: Colors.blue,
+              ),
+              child: Text(
+                'Menu',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 24,
+                ),
+              ),
+            ),
+            ListTile(
+              leading: const Icon(Icons.schedule),
+              title: const Text('Booking'),
+              onTap: () {
+                _next(0);
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.cake_outlined),
+              title: const Text('Holiday'),
+              onTap: () {
+                _next(1);
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.settings),
+              title: const Text('Settings'),
+              onTap: () {
+                _next(2);
+                Navigator.pop(context);
+              },
+            ),
+          ],
+        ),
       ),
       body: PageView(
         controller: _pageController,
@@ -61,11 +122,7 @@ class _IndexState extends State<Index> {
         currentIndex: _index,
         onTap: (index) {
           _index = index;
-          _pageController.animateToPage(
-            index,
-            duration: const Duration(milliseconds: 300),
-            curve: Curves.easeIn,
-          );
+          _next(index);
         },
       ),
     );
