@@ -54,7 +54,7 @@ class LoginApp extends StatelessWidget {
                     hintText: 'ユーザIDを入力してください',
                   ),
                   validator: context.read<LoginModel>().emptyValidator,
-                  onChanged: (value) => context.read<LoginModel>().id = value,
+                  onSaved: (value) => context.read<LoginModel>().id = value!,
                 ),
                 TextFormField(
                   obscureText: !context.watch<LoginModel>().showPassword,
@@ -70,8 +70,8 @@ class LoginApp extends StatelessWidget {
                     ),
                   ),
                   validator: context.read<LoginModel>().emptyValidator,
-                  onChanged: (value) =>
-                      context.read<LoginModel>().password = value,
+                  onSaved: (value) =>
+                      context.read<LoginModel>().password = value!,
                 ),
                 const Gap(8),
                 Container(
@@ -81,6 +81,7 @@ class LoginApp extends StatelessWidget {
                     child: ElevatedButton(
                       onPressed: () async {
                         if (_formKey.currentState!.validate()) {
+                          _formKey.currentState!.save();
                           var session = await context.read<LoginModel>().auth();
 
                           context.read<LocalState>().write(
