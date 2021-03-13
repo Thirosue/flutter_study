@@ -38,14 +38,19 @@ class _IndexState extends State<Index> {
     super.dispose();
   }
 
-  void _next(int index) {
+  void _animateToPage(int index) {
+    _pageController.animateToPage(
+      index,
+      duration: const Duration(milliseconds: 300),
+      curve: Curves.easeIn,
+    );
+  }
+
+  void _openPage(int index, BuildContext context) {
     if (index != _index) {
-      _pageController.animateToPage(
-        index,
-        duration: const Duration(milliseconds: 300),
-        curve: Curves.easeIn,
-      );
+      _animateToPage(index);
     }
+    Navigator.pop(context);
   }
 
   @override
@@ -82,26 +87,17 @@ class _IndexState extends State<Index> {
             ListTile(
               leading: const Icon(Icons.schedule),
               title: const Text('Booking'),
-              onTap: () {
-                _next(0);
-                Navigator.pop(context);
-              },
+              onTap: () => _openPage(0, context),
             ),
             ListTile(
               leading: const Icon(Icons.cake_outlined),
               title: const Text('Holiday'),
-              onTap: () {
-                _next(1);
-                Navigator.pop(context);
-              },
+              onTap: () => _openPage(1, context),
             ),
             ListTile(
               leading: const Icon(Icons.settings),
               title: const Text('Settings'),
-              onTap: () {
-                _next(2);
-                Navigator.pop(context);
-              },
+              onTap: () => _openPage(2, context),
             ),
           ],
         ),
@@ -122,7 +118,7 @@ class _IndexState extends State<Index> {
         currentIndex: _index,
         onTap: (index) {
           _index = index;
-          _next(index);
+          _animateToPage(index);
         },
       ),
     );
