@@ -1,7 +1,26 @@
+import 'dart:convert';
+
+import 'package:get_storage/get_storage.dart';
+
 import '../model/store.dart';
 
-abstract class StoreRepository {
-  Store read(String key);
+class StoreRepository {
+  final box = GetStorage();
 
-  void write(String key, Store values);
+  Store read(String key) {
+    var json = box.read(key);
+    if (json != null) {
+      return Store.fromJson(jsonDecode(json));
+    } else {
+      return const Store(
+        idToken: '',
+        refreshToken: '',
+        accessToken: '',
+      );
+    }
+  }
+
+  void write(String key, Store values) {
+    box.write(key, jsonEncode(values));
+  }
 }

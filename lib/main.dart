@@ -3,8 +3,8 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
 import 'constants.dart';
-import 'repository/auth_repository_impl.dart';
-import 'repository/store_repository_impl.dart';
+import 'repository/auth_repository.dart';
+import 'repository/store_repository.dart';
 import 'ui/index/index.dart';
 import 'ui/local_state.dart';
 import 'ui/login/login_middleware.dart';
@@ -41,9 +41,9 @@ class App extends StatelessWidget {
     // redirect settings
     var loginMiddleWare = LoginMiddleWare(
       localState: LocalState(
-        StoreRepositoryImpl(),
+        StoreRepository(),
       ),
-      auth: AuthRepositoryImpl(),
+      auth: AuthRepository(),
     );
     loginMiddleWare.redirect(Constants.login);
 

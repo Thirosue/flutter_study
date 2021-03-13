@@ -4,8 +4,8 @@ import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
 
 import '../../model/store.dart';
-import '../../repository/auth_repository_impl.dart';
-import '../../repository/store_repository_impl.dart';
+import '../../repository/auth_repository.dart';
+import '../../repository/store_repository.dart';
 import '../../ui/login/login_navigator.dart';
 import '../local_state.dart';
 import 'login_model.dart';
@@ -17,12 +17,12 @@ class LoginPage extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(
           create: (context) => LoginModel(
-            AuthRepositoryImpl(),
+            AuthRepository(),
           ),
         ),
         Provider(
           create: (context) => LocalState(
-            StoreRepositoryImpl(),
+            StoreRepository(),
           ),
         ),
         Provider(
