@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gap/gap.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
+import '../../constants.dart';
+import '../../helpers/message_utils.dart';
 import '../../model/store.dart';
 import '../../repository/auth_repository.dart';
 import '../../repository/store_repository.dart';
-import '../../ui/login/login_navigator.dart';
 import '../local_state.dart';
 import 'login_model.dart';
 
@@ -25,9 +27,6 @@ class LoginPage extends StatelessWidget {
             StoreRepository(),
           ),
         ),
-        Provider(
-          create: (context) => LoginNavigator(),
-        )
       ],
       child: LoginApp(),
     );
@@ -92,7 +91,8 @@ class LoginApp extends StatelessWidget {
                                 ),
                               );
 
-                          context.read<LoginNavigator>().next('ログインしました');
+                          Get.toNamed(Constants.index);
+                          MessageUtils.showSnackBar('ログイン', 'ログインしました');
                         }
                       },
                       child: const Text('ログイン'),
