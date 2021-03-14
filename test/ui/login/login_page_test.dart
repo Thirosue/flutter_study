@@ -88,6 +88,7 @@ void main() async {
       await tester.pump();
 
       expect(emptyText, findsOneWidget);
+      expect(emptyText.evaluate().length, 1);
     });
 
     testWidgets('4. パスワードを空でログインボタンを推したとき、入力チェックが動作し、エラーとなること', (tester) async {
@@ -99,6 +100,7 @@ void main() async {
       await tester.pump();
 
       expect(emptyText, findsOneWidget);
+      expect(emptyText.evaluate().length, 1);
     });
 
     testWidgets('5. ユーザID、及びパスワードを空でログインボタンを押したとき、入力チェックが動作し、エラーとなること',
@@ -110,6 +112,7 @@ void main() async {
 
       expect(emptyText.at(0), findsOneWidget);
       expect(emptyText.at(1), findsOneWidget);
+      expect(emptyText.evaluate().length, 2);
     });
 
     testWidgets('5. ユーザID、及びパスワードを入力しログインボタンを押したとき、入力チェックが動作し、エラーとならないこと',
