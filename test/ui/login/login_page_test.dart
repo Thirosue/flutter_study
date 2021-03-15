@@ -33,7 +33,7 @@ void main() async {
   when(mockStoreRepository.read(key)).thenReturn(state);
   when(mockStoreRepository.write(key, state)).thenReturn('write success !');
 
-  GetMaterialApp build() {
+  GetMaterialApp loginApp() {
     return GetMaterialApp(
       home: MultiProvider(
         providers: [
@@ -54,84 +54,84 @@ void main() async {
   }
 
   /// ///////////////////
-  /// widgets
-  /// //////////////////
-  final target = build();
-
-  /// ///////////////////
   /// elements
   /// //////////////////
-  final id = find.byType(TextFormField).at(0);
-  final password = find.byType(TextFormField).at(1);
-  final emptyText = find.text('入力してください');
-  final submit = find.text('ログイン');
-  final passwordMaskToggle = find.byType(IconButton);
-  final passwordText = 'hoge';
+  final _id = find.byType(TextFormField).at(0);
+  final _password = find.byType(TextFormField).at(1);
+  final _submitButton = find.text('ログイン');
+  final _passwordViewToggle = find.byType(IconButton);
 
   group('LoginPage ', () {
     testWidgets('1. 画面が表示されたとき、ログインボタンが存在すること', (tester) async {
-      await tester.pumpWidget(target);
-      expect(submit, findsOneWidget);
+      await tester.pumpWidget(loginApp());
+      expect(_submitButton, findsOneWidget);
     });
 
     testWidgets('2. 画面が表示されたとき、入力チェックが動作していないこと', (tester) async {
-      await tester.pumpWidget(target);
-      expect(emptyText, findsNothing);
+      await tester.pumpWidget(loginApp());
+      expect(find.text('入力してください'), findsNothing);
     });
 
-    testWidgets('3. ユーザIDを空でログインボタンを推したとき、入力チェックが動作し、エラーとなること', (tester) async {
-      await tester.pumpWidget(target);
-
-      await tester.enterText(password, 'password');
-
-      await tester.tap(submit);
-      await tester.pump();
-
-      expect(emptyText, findsOneWidget);
-      expect(emptyText.evaluate().length, 1);
-    });
-
-    testWidgets('4. パスワードを空でログインボタンを推したとき、入力チェックが動作し、エラーとなること', (tester) async {
-      await tester.pumpWidget(target);
-
-      await tester.enterText(id, 'demo');
-
-      await tester.tap(submit);
-      await tester.pump();
-
-      expect(emptyText, findsOneWidget);
-      expect(emptyText.evaluate().length, 1);
-    });
-
-    testWidgets('5. ユーザID、及びパスワードを空でログインボタンを押したとき、入力チェックが動作し、エラーとなること',
+    testWidgets('3. ユーザIDを入力せずにログインボタンを押したとき、入力チェックが動作し、エラーとなること',
         (tester) async {
-      await tester.pumpWidget(target);
+      await tester.pumpWidget(loginApp());
 
-      await tester.tap(submit);
+      await tester.enterText(_password, 'password');
+
+      await tester.tap(_submitButton);
       await tester.pump();
 
-      expect(emptyText.at(0), findsOneWidget);
-      expect(emptyText.at(1), findsOneWidget);
-      expect(emptyText.evaluate().length, 2);
+      final validationErrorMessages = find.text('入力してください');
+      expect(validationErrorMessages, findsOneWidget);
+      verifyNever(mockAuthRepository.auth());
+    });
+
+    testWidgets('4. パスワードを入力せずにログインボタンを押したとき、入力チェックが動作し、エラーとなること',
+        (tester) async {
+      await tester.pumpWidget(loginApp());
+
+      await tester.enterText(_id, 'demo');
+
+      await tester.tap(_submitButton);
+      await tester.pump();
+
+      final validationErrorMessages = find.text('入力してください');
+      expect(validationErrorMessages, findsOneWidget);
+      verifyNever(mockAuthRepository.auth());
+    });
+
+    testWidgets('5. ユーザID、及びパスワードを入力せずにログインボタンを押したとき、入力チェックが動作し、エラーとなること',
+        (tester) async {
+      await tester.pumpWidget(loginApp());
+
+      await tester.tap(_submitButton);
+      await tester.pump();
+
+      final validationErrorMessages = find.text('入力してください');
+      expect(validationErrorMessages, findsNWidgets(2));
+      verifyNever(mockAuthRepository.auth());
     });
 
     testWidgets('5. ユーザID、及びパスワードを入力しログインボタンを押したとき、入力チェックが動作し、エラーとならないこと',
         (tester) async {
-      await tester.pumpWidget(target);
-      when(mockAuthRepository.auth()).thenAnswer((_) => Future.value(response));
+      await tester.pumpWidget(loginApp());
+      when(mockAuthRepository.auth())
+          .thenAnswer((_) => Future.value(response)); // 認証OK
 
-      await tester.enterText(password, 'password');
-      await tester.enterText(id, 'demo');
+      await tester.enterText(_password, 'password');
+      await tester.enterText(_id, 'demo');
 
-      await tester.tap(submit);
-      await tester.pump(Duration(seconds: 10)); // SnackBarが表示されるのを待ち合わせる
+      await tester.tap(_submitButton);
+      await tester.pump(Duration(seconds: 60)); // SnackBarが表示されるのを待ち合わせる
 
-      expect(emptyText, findsNothing);
+      expect(find.text('入力してください'), findsNothing);
+      expect(find.text('パスワードが誤っています'), findsNothing);
+      verify(mockAuthRepository.auth()).called(1);
     });
 
     testWidgets('6. パスワードを入力したとき、入力した文言がマスク(••••)されていること', (tester) async {
-      await tester.pumpWidget(target);
-      await tester.enterText(password, passwordText);
+      await tester.pumpWidget(loginApp());
+      await tester.enterText(_password, 'hoge');
       await tester.pump();
 
       final String editText = findRenderEditable(tester, 1).text!.text!;
@@ -141,11 +141,11 @@ void main() async {
     });
 
     testWidgets(
-        '6. パスワードを入力し、パスワード表示アイコンを押したとき、入力した文言のマスクが解除されていること。もう一度パスワードマスクアイコンを押したとき、パスワードがマスクされること',
+        '7. パスワードを入力し、パスワード表示アイコンを押したとき、入力した文言のマスクが解除されていること。もう一度パスワードマスクアイコンを押したとき、パスワードがマスクされること',
         (tester) async {
-      await tester.pumpWidget(target);
-      await tester.enterText(password, passwordText);
-      await tester.tap(passwordMaskToggle);
+      await tester.pumpWidget(loginApp());
+      await tester.enterText(_password, 'hoge');
+      await tester.tap(_passwordViewToggle);
       await tester.pump();
 
       final String editText = findRenderEditable(tester, 1).text!.text!;
@@ -153,7 +153,7 @@ void main() async {
 
       expect(editText, 'hoge');
 
-      await tester.tap(passwordMaskToggle);
+      await tester.tap(_passwordViewToggle);
       await tester.pump();
 
       final String editTextAfter = findRenderEditable(tester, 1).text!.text!;
