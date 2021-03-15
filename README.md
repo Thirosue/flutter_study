@@ -1,5 +1,8 @@
 # flutter_app
 
+[![Flutter](https://github.com/Thirosue/flutter_study/actions/workflows/flutter.yml/badge.svg)](https://github.com/Thirosue/flutter_study/actions/workflows/flutter.yml)
+[![codecov](https://codecov.io/gh/Thirosue/flutter_study/branch/master/graph/badge.svg?token=780C8X1CWE)](https://codecov.io/gh/Thirosue/flutter_study)
+
 A new Flutter application.
 
 ## Getting Started
