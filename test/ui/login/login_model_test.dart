@@ -20,6 +20,7 @@ void main() async {
 
       expect(session.idToken,
           "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c");
+      verify(mock.auth()).called(1);
     });
 
     test('1-2. 認証APIが異常終了するとき、例外がthrowされること', () async {
@@ -31,6 +32,7 @@ void main() async {
 
       var model = LoginModel(mock);
       expect(() => model.auth(), throwsException);
+      verify(mock.auth()).called(1);
     });
   });
 
