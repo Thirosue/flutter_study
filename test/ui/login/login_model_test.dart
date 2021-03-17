@@ -11,8 +11,8 @@ void main() async {
   final mock = MockAuthRepository();
   final response = await DummyResponse.getAuthPostResponse();
 
-  group('1. LoginModel auth() ', () {
-    test('1-1. 認証APIが正常終了するとき、セッションの中身が正常に検証できること', () async {
+  group('LoginModel auth() ', () {
+    test('認証APIが正常終了するとき、セッションの中身が正常に検証できること', () async {
       // given
       when(mock.auth()).thenAnswer((_) => Future.value(response));
       var model = LoginModel(mock);
@@ -26,7 +26,7 @@ void main() async {
       verify(mock.auth()).called(1);
     });
 
-    test('1-2. 認証APIが異常終了するとき、例外がthrowされること', () async {
+    test('認証APIが異常終了するとき、例外がthrowされること', () async {
       // given
       when(mock.auth()).thenThrow(
         Exception('api error occurred'),
@@ -43,8 +43,8 @@ void main() async {
     MockAuthRepository(),
   );
 
-  group('2. LoginModel emptyValidator ', () {
-    test('2-1. value が null のとき、エラー文言を返すこと', () {
+  group('LoginModel emptyValidator ', () {
+    test('value が null のとき、エラー文言を返すこと', () {
       // when
       var message = target.emptyValidator(null);
 
@@ -53,7 +53,7 @@ void main() async {
       expect(message?.isNotEmpty, true);
     });
 
-    test('2-2. value が 空文字 のとき、エラー文言を返すこと', () {
+    test('value が 空文字 のとき、エラー文言を返すこと', () {
       // when
       var message = target.emptyValidator('');
 
@@ -62,7 +62,7 @@ void main() async {
       expect(message?.isNotEmpty, true);
     });
 
-    test('2-3. value が 半角スペース のとき、nullを返すこと', () {
+    test('value が 半角スペース のとき、nullを返すこと', () {
       // when
       var message = target.emptyValidator(' ');
 
@@ -70,7 +70,7 @@ void main() async {
       expect(message, null);
     });
 
-    test('2-4. value が 全角スペース のとき、nullを返すこと', () {
+    test('value が 全角スペース のとき、nullを返すこと', () {
       // when
       var message = target.emptyValidator('　');
 
@@ -78,7 +78,7 @@ void main() async {
       expect(message, null);
     });
 
-    test('2-5. value が 文字列「password」 のとき、nullを返すこと', () {
+    test('value が 文字列「password」 のとき、nullを返すこと', () {
       // when
       var message = target.emptyValidator('password');
 
@@ -87,8 +87,8 @@ void main() async {
     });
   });
 
-  group('3. LoginModel togglePasswordVisible() ', () {
-    test('1-1. toggleをコールするごとに、showPasswordが切り替わること', () {
+  group('LoginModel togglePasswordVisible() ', () {
+    test('toggleをコールするごとに、showPasswordが切り替わること', () {
       // given
       expect(target.showPassword, false);
 

@@ -16,8 +16,8 @@ void main() async {
   );
   final target = LocalState(mock);
 
-  group('1. LocalState read() ', () {
-    test('1-1. ストレージが正常に利用できるとき、正常に状態が取得できること', () {
+  group('LocalState read() ', () {
+    test('ストレージが正常に利用できるとき、正常に状態が取得できること', () {
       // given
       when(mock.read(key)).thenReturn(dummy);
 
@@ -32,7 +32,7 @@ void main() async {
       verify(mock.read(key)).called(1);
     });
 
-    test('1-2. ストレージが異常が発生したとき、例外が発生すること', () {
+    test('ストレージが異常が発生したとき、例外が発生すること', () {
       // given
       when(mock.read(key)).thenThrow(Exception('storage error occurred'));
 
@@ -42,8 +42,8 @@ void main() async {
     });
   });
 
-  group('2. LocalState write() ', () {
-    test('2-1. ストレージが正常に利用できるとき、正常終了すること', () {
+  group('LocalState write() ', () {
+    test('ストレージが正常に利用できるとき、正常終了すること', () {
       // given
       when(mock.write(key, dummy)).thenReturn(null);
 
@@ -54,7 +54,7 @@ void main() async {
       verify(mock.write(key, dummy)).called(1);
     });
 
-    test('1-2. ストレージが異常が発生したとき、例外が発生すること', () {
+    test('ストレージが異常が発生したとき、例外が発生すること', () {
       // given
       when(mock.write(key, dummy))
           .thenThrow(Exception('storage error occurred'));

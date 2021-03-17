@@ -37,13 +37,6 @@ class LoginMiddleWare extends GetMiddleware {
     }
   }
 
-  void toIndex() {
-    Get.toNamed(Constants.index);
-    if (!Get.isSnackbarOpen!) {
-      MessageUtils.showSnackBar('ログイン', '自動ログインしました');
-    }
-  }
-
   @override
   RouteSettings? redirect(String? route) {
     print('login onInit. check token');
@@ -57,7 +50,10 @@ class LoginMiddleWare extends GetMiddleware {
           print('token refreshed... go to index page.');
 
           // auto login
-          toIndex();
+          Get.toNamed(Constants.index);
+          if (!Get.isSnackbarOpen!) {
+            MessageUtils.showSnackBar('ログイン', '自動ログインしました');
+          }
         }
       });
 
