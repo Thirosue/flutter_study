@@ -20,7 +20,7 @@ class LoginMiddleWare extends GetMiddleware {
   Future<bool> refreshToken() async {
     try {
       var results = await auth.refresh();
-      var session = Session.toList(results.data!)[0];
+      var session = Session.toList(results.data!).first;
 
       localState.write(
         Store(
