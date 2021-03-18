@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/model/response/session.dart';
 import 'package:flutter_app/model/store.dart';
 import 'package:flutter_app/repository/auth_repository.dart';
 import 'package:flutter_app/repository/store_repository.dart';
@@ -20,13 +21,19 @@ class MockStoreRepository extends Mock implements StoreRepository {}
 void main() async {
   Get.testMode = true;
 
-  final key = 'key';
+  final key = 'localState';
   final state = Store(
     idToken: '',
     refreshToken: '',
     accessToken: '',
   );
   final response = await DummyResponse.getAuthPostResponse();
+  final session = Session.toList(response.data!).first;
+  final values = Store(
+    idToken: session.idToken,
+    refreshToken: session.refreshToken,
+    accessToken: session.accessToken,
+  );
 
   final mockAuthRepository = MockAuthRepository();
   final mockStoreRepository = MockStoreRepository();
@@ -183,7 +190,10 @@ void main() async {
         // then
         expect(find.text('入力してください'), findsNothing);
         expect(find.text('パスワードが誤っています'), findsNothing);
-        verify(mockAuthRepository.auth()).called(1);
+        verifyInOrder([
+          mockAuthRepository.auth(),
+          mockStoreRepository.write(key, values),
+        ]);
       });
     });
   });
