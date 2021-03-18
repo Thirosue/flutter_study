@@ -194,6 +194,21 @@ void main() async {
           mockAuthRepository.auth(),
           mockStoreRepository.write(key, values),
         ]);
+        // ホームページに移動の検証は テスト容易性:高 かつ 重要度:低 のため、スキップ
+      });
+
+      testWidgets('ユーザID、及びパスワードを入力しログインボタンを押し、認証NGのとき、例外がthrowされること',
+          (tester) async {
+        // given
+        await tester.pumpWidget(loginApp());
+        when(mockAuthRepository.auth())
+            .thenThrow(Exception('auth failed')); // 認証 NG
+
+        await tester.enterText(_password, 'password');
+        await tester.enterText(_id, 'demo');
+
+        // when / then
+        // TODO expect(() => tester.tap(_submitButton), throwsException);
       });
     });
   });
