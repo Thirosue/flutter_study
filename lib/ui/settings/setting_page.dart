@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
+import '../../constants.dart';
 import '../../ui/component/template.dart';
 import 'setting_model.dart';
 
 class SettingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final index = Get.parameters['index'];
+    final index = Constants.settingIndex;
 
     return ChangeNotifierProvider(
-      create: (context) => SettingModel(index != null ? int.parse(index) : 0),
+      create: (context) => SettingModel(index),
       child: SettingApp(),
     );
   }

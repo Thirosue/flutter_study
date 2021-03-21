@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 
+import '../../constants.dart';
 import '../../model/calendar/schedule_data_source.dart';
 import '../../ui/component/template.dart';
 import 'holiday_model.dart';
@@ -10,10 +10,10 @@ import 'holiday_model.dart';
 class HolidayPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final index = Get.parameters['index'];
+    final index = Constants.holidayIndex;
 
     return ChangeNotifierProvider(
-      create: (context) => HolidayModel(index != null ? int.parse(index) : 0),
+      create: (context) => HolidayModel(index),
       child: HolidayApp(),
     );
   }

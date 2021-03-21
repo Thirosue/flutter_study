@@ -50,10 +50,7 @@ class LoginMiddleWare extends GetMiddleware {
           print('token refreshed... go to index page.');
 
           // auto login
-          Get.toNamed(
-            Constants.calendar,
-            parameters: {'index': '0'},
-          );
+          Get.toNamed(Constants.calendar);
           if (!Get.isSnackbarOpen!) {
             MessageUtils.showSnackBar('ログイン', '自動ログインしました');
           }

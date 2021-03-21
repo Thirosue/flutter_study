@@ -3,27 +3,34 @@ import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 
+import '../../../constants.dart';
 import '../../../model/calendar/schedule_data_source.dart';
 import '../../../ui/component/template.dart';
-import 'booking_model.dart';
+import 'day_model.dart';
 
-class BookingPage extends StatelessWidget {
+class DayPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final index = Get.parameters['index'];
+    final index = Constants.calendarIndex;
+    final booking = Get.arguments;
 
     return ChangeNotifierProvider(
-      create: (context) => BookingModel(index != null ? int.parse(index) : 0),
-      child: BookingApp(),
+      create: (context) => DayModel(
+        index,
+        booking,
+      ),
+      child: DayApp(),
     );
   }
 }
 
-class BookingApp extends StatelessWidget {
+class DayApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final booking = context.watch<DayModel>().bookings;
+
     return Template(
-      index: context.watch<BookingModel>().index,
+      index: context.watch<DayModel>().index,
       child: Padding(
         padding: const EdgeInsets.all(8),
         child: Scaffold(
@@ -36,12 +43,17 @@ class BookingApp extends StatelessWidget {
                 showAgenda: true,
               ),
               dataSource: ScheduleDataSource(
-                context.watch<BookingModel>().holidays,
+                booking,
               ),
               onTap: (details) {
                 print(details.date);
               },
             ),
+          ),
+          floatingActionButton: FloatingActionButton(
+            onPressed: () {},
+            tooltip: 'Booking',
+            child: const Icon(Icons.add),
           ),
         ),
       ),

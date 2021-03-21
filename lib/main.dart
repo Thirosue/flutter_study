@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/ui/booking/day/day_page.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
 import 'constants.dart';
 import 'repository/auth_repository.dart';
 import 'repository/store_repository.dart';
-import 'ui/booking/add/booking_page.dart';
 import 'ui/booking/calendar_page.dart';
+import 'ui/booking/day/day_page.dart';
 import 'ui/holiday/holiday_page.dart';
 import 'ui/local_state.dart';
 import 'ui/login/login_middleware.dart';
@@ -26,7 +27,7 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // redirect settings
-    var loginMiddleWare = LoginMiddleWare(
+    final loginMiddleWare = LoginMiddleWare(
       localState: LocalState(
         StoreRepository(),
       ),
@@ -46,8 +47,8 @@ class App extends StatelessWidget {
           page: () => CalendarPage(),
         ),
         GetPage(
-          name: Constants.booking,
-          page: () => BookingPage(),
+          name: Constants.day,
+          page: () => DayPage(),
         ),
         GetPage(
           name: Constants.holiday,

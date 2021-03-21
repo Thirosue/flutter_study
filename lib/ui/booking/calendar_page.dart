@@ -3,17 +3,32 @@ import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 
+import '../../constants.dart';
+import '../../model/calendar/schedule.dart';
 import '../../model/calendar/schedule_data_source.dart';
+import '../../repository/calendar_repository.dart';
 import '../../ui/component/template.dart';
 import 'calendar_model.dart';
 
 class CalendarPage extends StatelessWidget {
+  final CalendarRepository repository = CalendarRepository();
+
   @override
   Widget build(BuildContext context) {
-    final index = Get.parameters['index'];
+    final index = Constants.calendarIndex;
 
-    return ChangeNotifierProvider(
-      create: (context) => CalendarModel(index != null ? int.parse(index) : 0),
+    return FutureProvider<CalendarModel>(
+      create: (context) async {
+        var bookings = await repository.current();
+        return CalendarModel(
+          index,
+          bookings,
+        );
+      },
+      initialData: CalendarModel(
+        index,
+        <Schedule>[],
+      ),
       child: CalendarApp(),
     );
   }
@@ -22,6 +37,8 @@ class CalendarPage extends StatelessWidget {
 class CalendarApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final booking = context.watch<CalendarModel>().bookings;
+
     return Template(
       index: context.watch<CalendarModel>().index,
       child: Padding(
@@ -36,10 +53,13 @@ class CalendarApp extends StatelessWidget {
                 showAgenda: true,
               ),
               dataSource: ScheduleDataSource(
-                context.watch<CalendarModel>().holidays,
+                booking,
               ),
               onTap: (details) {
-                print(details.date);
+                Get.toNamed(
+                  Constants.day,
+                  arguments: booking,
+                );
               },
             ),
           ),

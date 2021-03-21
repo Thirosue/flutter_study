@@ -20,10 +20,7 @@ class Template extends StatelessWidget {
   }) : super(key: key);
 
   void move(int index) {
-    Get.toNamed(
-      tabList[index].last,
-      parameters: {'index': index.toString()},
-    );
+    Get.toNamed(tabList[index].last);
   }
 
   @override

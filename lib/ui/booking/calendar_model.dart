@@ -4,8 +4,7 @@ import '../../model/calendar/schedule.dart';
 
 class CalendarModel extends ChangeNotifier {
   int index;
+  List<Schedule> bookings;
 
-  CalendarModel(this.index);
-
-  List<Schedule> holidays = <Schedule>[];
+  CalendarModel(this.index, this.bookings);
 }

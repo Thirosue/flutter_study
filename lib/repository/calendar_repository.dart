@@ -21,7 +21,7 @@ class CalendarRepository {
           to: day.add(
             Duration(hours: [1, 2][random.nextInt(2)]),
           ),
-          subject: 'Holiday',
+          subject: 'Booking',
         ));
 
     return Future.value(schedule.toList());
