@@ -5,8 +5,8 @@ class StatefulWrapper extends StatefulWidget {
   final Function? onInit;
 
   const StatefulWrapper({
-    required Key key,
     required this.child,
+    Key? key,
     this.onInit,
   }) : super(key: key);
 

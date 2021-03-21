@@ -5,26 +5,13 @@ import 'package:get_storage/get_storage.dart';
 import 'constants.dart';
 import 'repository/auth_repository.dart';
 import 'repository/store_repository.dart';
-import 'ui/index/index.dart';
+import 'ui/booking/add/booking_page.dart';
+import 'ui/booking/calendar_page.dart';
+import 'ui/holiday/holiday_page.dart';
 import 'ui/local_state.dart';
 import 'ui/login/login_middleware.dart';
 import 'ui/login/login_page.dart';
-
-/// /////////////////////////
-/// Page Settings
-/// /////////////////////////
-
-// login page
-final loginPage = GetPage(
-  name: Constants.login,
-  page: () => LoginPage(),
-);
-
-// index page
-final indexPage = GetPage(
-  name: Constants.index,
-  page: () => Index(),
-);
+import 'ui/settings/setting_page.dart';
 
 /// /////////////////////////
 /// main
@@ -50,8 +37,26 @@ class App extends StatelessWidget {
     return GetMaterialApp(
       initialRoute: Constants.login,
       getPages: [
-        loginPage,
-        indexPage,
+        GetPage(
+          name: Constants.login,
+          page: () => LoginPage(),
+        ),
+        GetPage(
+          name: Constants.calendar,
+          page: () => CalendarPage(),
+        ),
+        GetPage(
+          name: Constants.booking,
+          page: () => BookingPage(),
+        ),
+        GetPage(
+          name: Constants.holiday,
+          page: () => HolidayPage(),
+        ),
+        GetPage(
+          name: Constants.settings,
+          page: () => SettingPage(),
+        ),
       ],
     );
   }

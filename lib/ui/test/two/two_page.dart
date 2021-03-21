@@ -2,28 +2,28 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
-import '../../ui/component/template.dart';
-import 'setting_model.dart';
+import '../../component/template.dart';
+import 'two_model.dart';
 
-class SettingPage extends StatelessWidget {
+class TwoPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final index = Get.parameters['index'];
 
     return ChangeNotifierProvider(
-      create: (context) => SettingModel(index != null ? int.parse(index) : 0),
-      child: SettingApp(),
+      create: (context) => TwoModel(index != null ? int.parse(index) : 0),
+      child: TwoApp(),
     );
   }
 }
 
-class SettingApp extends StatelessWidget {
-  static const String _title = 'Settings';
+class TwoApp extends StatelessWidget {
+  static const String _title = 'Two';
 
   @override
   Widget build(BuildContext context) {
     return Template(
-      index: context.watch<SettingModel>().index,
+      index: context.watch<TwoModel>().index,
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Container(

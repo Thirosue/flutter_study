@@ -91,7 +91,10 @@ class LoginApp extends StatelessWidget {
                                 ),
                               );
 
-                          Get.toNamed(Constants.index);
+                          Get.toNamed(
+                            Constants.calendar,
+                            parameters: {'index': '0'},
+                          );
                           MessageUtils.showSnackBar('ログイン', 'ログインしました');
                         }
                       },

@@ -1,56 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-import '../../model/tab_item.dart';
-import '../booking/booking_page.dart';
-import '../holiday/holiday_page.dart';
-import '../settings/setting_page.dart';
+import '../../constants.dart';
 
-class Index extends StatefulWidget {
-  @override
-  State<StatefulWidget> createState() => _IndexState();
-}
+class Template extends StatelessWidget {
+  final int index;
+  final Widget child;
 
-class _IndexState extends State<Index> {
-  int _index = 0;
-  PageController _pageController = PageController(initialPage: 0);
-
-  static final List<TabItem> _tabItemList = [
-    TabItem('Booking', BookingPage()),
-    TabItem('Holiday', HolidayPage()),
-    TabItem('Settings', SettingPage()),
+  static final List<List<String>> tabList = [
+    ['Booking', Constants.calendar],
+    ['Holiday', Constants.holiday],
+    ['Settings', Constants.settings],
   ];
 
-  void _onPageChanged(int index) {
-    setState(() {
-      _index = index;
-    });
-  }
+  const Template({
+    Key? key,
+    required this.child,
+    required this.index,
+  }) : super(key: key);
 
-  @override
-  void initState() {
-    super.initState();
-    _pageController = PageController(initialPage: _index);
-  }
-
-  @override
-  void dispose() {
-    _pageController.dispose();
-    super.dispose();
-  }
-
-  void _animateToPage(int index) {
-    _pageController.animateToPage(
-      index,
-      duration: const Duration(milliseconds: 300),
-      curve: Curves.easeIn,
+  void move(int index) {
+    Get.toNamed(
+      tabList[index].last,
+      parameters: {'index': index.toString()},
     );
-  }
-
-  void _openPage(int index, BuildContext context) {
-    if (index != _index) {
-      _animateToPage(index);
-    }
-    Navigator.pop(context);
   }
 
   @override
@@ -66,7 +39,7 @@ class _IndexState extends State<Index> {
           ),
         ),
         automaticallyImplyLeading: false,
-        title: Text(_tabItemList[_index].title),
+        title: Text(tabList[index].first),
       ),
       drawer: Drawer(
         child: ListView(
@@ -87,26 +60,22 @@ class _IndexState extends State<Index> {
             ListTile(
               leading: const Icon(Icons.schedule),
               title: const Text('Booking'),
-              onTap: () => _openPage(0, context),
+              onTap: () => move(0),
             ),
             ListTile(
               leading: const Icon(Icons.cake_outlined),
               title: const Text('Holiday'),
-              onTap: () => _openPage(1, context),
+              onTap: () => move(1),
             ),
             ListTile(
               leading: const Icon(Icons.settings),
               title: const Text('Settings'),
-              onTap: () => _openPage(2, context),
+              onTap: () => move(2),
             ),
           ],
         ),
       ),
-      body: PageView(
-        controller: _pageController,
-        onPageChanged: _onPageChanged,
-        children: _tabItemList.map((e) => e.widget).toList(),
-      ),
+      body: child,
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(icon: Icon(Icons.schedule), label: 'Booking'),
@@ -115,11 +84,8 @@ class _IndexState extends State<Index> {
           BottomNavigationBarItem(
               icon: Icon(Icons.settings), label: 'Settings'),
         ],
-        currentIndex: _index,
-        onTap: (index) {
-          _index = index;
-          _animateToPage(index);
-        },
+        currentIndex: index,
+        onTap: move,
       ),
     );
   }

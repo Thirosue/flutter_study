@@ -5,27 +5,27 @@ import 'package:syncfusion_flutter_calendar/calendar.dart';
 
 import '../../model/calendar/schedule_data_source.dart';
 import '../../ui/component/template.dart';
-import 'holiday_model.dart';
+import 'calendar_model.dart';
 
-class HolidayPage extends StatelessWidget {
+class CalendarPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final index = Get.parameters['index'];
 
     return ChangeNotifierProvider(
-      create: (context) => HolidayModel(index != null ? int.parse(index) : 0),
-      child: HolidayApp(),
+      create: (context) => CalendarModel(index != null ? int.parse(index) : 0),
+      child: CalendarApp(),
     );
   }
 }
 
-class HolidayApp extends StatelessWidget {
+class CalendarApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Template(
-      index: context.watch<HolidayModel>().index,
+      index: context.watch<CalendarModel>().index,
       child: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(8),
         child: Scaffold(
           body: Container(
             child: SfCalendar(
@@ -33,16 +33,19 @@ class HolidayApp extends StatelessWidget {
               todayHighlightColor: Colors.red,
               showNavigationArrow: true,
               monthViewSettings: const MonthViewSettings(
-                appointmentDisplayMode: MonthAppointmentDisplayMode.appointment,
+                showAgenda: true,
               ),
               dataSource: ScheduleDataSource(
-                context.watch<HolidayModel>().holidays,
+                context.watch<CalendarModel>().holidays,
               ),
+              onTap: (details) {
+                print(details.date);
+              },
             ),
           ),
           floatingActionButton: FloatingActionButton(
-            onPressed: context.read<HolidayModel>().add,
-            tooltip: 'Increment',
+            onPressed: () {},
+            tooltip: 'Booking',
             child: const Icon(Icons.add),
           ),
         ),
