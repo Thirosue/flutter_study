@@ -6,6 +6,7 @@ import '../../constants.dart';
 class Template extends StatelessWidget {
   final int index;
   final Widget child;
+  final List<Widget>? actions;
 
   static final List<List<String>> tabList = [
     ['Booking', Constants.calendar],
@@ -17,6 +18,7 @@ class Template extends StatelessWidget {
     Key? key,
     required this.child,
     required this.index,
+    this.actions,
   }) : super(key: key);
 
   void move(int index) {
@@ -35,8 +37,8 @@ class Template extends StatelessWidget {
             },
           ),
         ),
-        automaticallyImplyLeading: false,
         title: Text(tabList[index].first),
+        actions: actions,
       ),
       drawer: Drawer(
         child: ListView(

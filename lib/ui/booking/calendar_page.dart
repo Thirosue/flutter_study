@@ -9,9 +9,12 @@ import '../../model/calendar/schedule_data_source.dart';
 import '../../repository/calendar_repository.dart';
 import '../../ui/component/template.dart';
 import 'calendar_model.dart';
+import 'day/day_page.dart';
 
 class CalendarPage extends StatelessWidget {
-  final CalendarRepository repository = CalendarRepository();
+  final CalendarRepository repository;
+
+  const CalendarPage({Key? key, required this.repository}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -55,10 +58,14 @@ class CalendarApp extends StatelessWidget {
               dataSource: ScheduleDataSource(
                 booking,
               ),
-              onTap: (details) {
-                Get.toNamed(
-                  Constants.day,
-                  arguments: booking,
+              onLongPress: (details) {
+                Get.to(
+                  () => DayPage(),
+                  arguments: [
+                    details.date,
+                    booking,
+                  ],
+                  fullscreenDialog: true,
                 );
               },
             ),

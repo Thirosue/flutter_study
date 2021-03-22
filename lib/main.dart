@@ -5,6 +5,7 @@ import 'package:get_storage/get_storage.dart';
 
 import 'constants.dart';
 import 'repository/auth_repository.dart';
+import 'repository/calendar_repository.dart';
 import 'repository/store_repository.dart';
 import 'ui/booking/calendar_page.dart';
 import 'ui/booking/day/day_page.dart';
@@ -44,7 +45,9 @@ class App extends StatelessWidget {
         ),
         GetPage(
           name: Constants.calendar,
-          page: () => CalendarPage(),
+          page: () => CalendarPage(
+            repository: CalendarRepository(),
+          ),
         ),
         GetPage(
           name: Constants.day,
