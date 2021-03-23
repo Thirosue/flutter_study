@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/ui/booking/day/day_page.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
@@ -8,7 +7,6 @@ import 'repository/auth_repository.dart';
 import 'repository/calendar_repository.dart';
 import 'repository/store_repository.dart';
 import 'ui/booking/calendar_page.dart';
-import 'ui/booking/day/day_page.dart';
 import 'ui/holiday/holiday_page.dart';
 import 'ui/local_state.dart';
 import 'ui/login/login_middleware.dart';
@@ -48,10 +46,6 @@ class App extends StatelessWidget {
           page: () => CalendarPage(
             repository: CalendarRepository(),
           ),
-        ),
-        GetPage(
-          name: Constants.day,
-          page: () => DayPage(),
         ),
         GetPage(
           name: Constants.holiday,

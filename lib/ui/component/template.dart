@@ -9,9 +9,9 @@ class Template extends StatelessWidget {
   final List<Widget>? actions;
 
   static final List<List<String>> tabList = [
-    ['Booking', Constants.calendar],
-    ['Holiday', Constants.holiday],
-    ['Settings', Constants.settings],
+    [Constants.calendarTitle, Constants.calendar],
+    [Constants.holidayTitle, Constants.holiday],
+    [Constants.settingTitle, Constants.settings],
   ];
 
   const Template({

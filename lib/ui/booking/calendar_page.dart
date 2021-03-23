@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/ui/booking/register/booking_page.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
@@ -41,6 +42,7 @@ class CalendarApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final booking = context.watch<CalendarModel>().bookings;
+    var selected = context.read<CalendarModel>().selected;
 
     return Template(
       index: context.watch<CalendarModel>().index,
@@ -58,6 +60,9 @@ class CalendarApp extends StatelessWidget {
               dataSource: ScheduleDataSource(
                 booking,
               ),
+              onTap: (details) {
+                selected = details.date;
+              },
               onLongPress: (details) {
                 Get.to(
                   () => DayPage(),
@@ -71,7 +76,15 @@ class CalendarApp extends StatelessWidget {
             ),
           ),
           floatingActionButton: FloatingActionButton(
-            onPressed: () {},
+            onPressed: () {
+              final day =
+                  DateTime.now().isBefore(selected) ? selected : DateTime.now();
+              Get.to(
+                () => BookingPage(),
+                arguments: day,
+                fullscreenDialog: true,
+              );
+            },
             tooltip: 'Booking',
             child: const Icon(Icons.add),
           ),

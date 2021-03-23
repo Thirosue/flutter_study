@@ -41,35 +41,37 @@ class DayApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final booking = context.watch<DayModel>().bookings;
+    var selected = context.read<DayModel>().selected;
 
-    return Padding(
-      padding: const EdgeInsets.all(8),
-      child: Scaffold(
-        appBar: AppBar(
-          title: const Text('Booking'),
-        ),
-        body: Container(
-          child: SfCalendar(
-            view: CalendarView.day,
-            initialDisplayDate: initialDisplayDate,
-            todayHighlightColor: Colors.red,
-            showNavigationArrow: true,
-            monthViewSettings: const MonthViewSettings(
-              showAgenda: true,
-            ),
-            dataSource: ScheduleDataSource(
-              booking,
-            ),
-            onTap: (details) {
-              print(details.date);
-            },
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text(Constants.calendarTitle),
+      ),
+      body: Container(
+        child: SfCalendar(
+          view: CalendarView.day,
+          initialDisplayDate: initialDisplayDate,
+          todayHighlightColor: Colors.red,
+          showNavigationArrow: true,
+          monthViewSettings: const MonthViewSettings(
+            showAgenda: true,
           ),
+          dataSource: ScheduleDataSource(
+            booking,
+          ),
+          onViewChanged: (details) {
+            selected = details.visibleDates.first;
+            print(selected);
+          },
+          onTap: (details) {
+            print(details.date);
+          },
         ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {},
-          tooltip: 'Booking',
-          child: const Icon(Icons.add),
-        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        tooltip: 'Booking',
+        child: const Icon(Icons.add),
       ),
     );
   }

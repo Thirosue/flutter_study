@@ -12,4 +12,8 @@ class Constants {
   static const int calendarIndex = 0;
   static const int holidayIndex = 1;
   static const int settingIndex = 2;
+
+  static const String calendarTitle = '予約編集';
+  static const String holidayTitle = '店休日設定';
+  static const String settingTitle = '設定変更';
 }
