@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 
 import '../../../constants.dart';
 import '../../../repository/booking_repository.dart';
+import '../../../ui/component/dropdown_form_field.dart';
 import 'booking_model.dart';
 
 class BookingPage extends StatelessWidget {
@@ -52,11 +53,12 @@ class BookingApp extends StatelessWidget {
                   ),
                   onSaved: (value) => model.time = value!,
                 ),
-                TextFormField(
-                  decoration: const InputDecoration(
-                    labelText: '時間枠',
-                  ),
-                  onSaved: (value) => model.cols,
+                const Gap(8),
+                DropDownFormField(
+                  titleText: '予約枠',
+                  items: model.colsItems,
+                  value: context.watch<BookingModel>().cols,
+                  onChanged: (value) => model.setCols(value!),
                 ),
                 TextFormField(
                   decoration: const InputDecoration(
