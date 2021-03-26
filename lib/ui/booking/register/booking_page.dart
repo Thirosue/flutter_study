@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 
 import '../../../constants.dart';
 import '../../../repository/booking_repository.dart';
+import '../../../ui/component/custom_text_form_field.dart';
 import '../../../ui/component/dropdown_form_field.dart';
 import 'booking_model.dart';
 
@@ -41,16 +42,13 @@ class BookingApp extends StatelessWidget {
             key: _formKey,
             child: Column(
               children: <Widget>[
-                TextFormField(
-                  decoration: const InputDecoration(
-                    labelText: '予約日',
-                  ),
+                CustomTextFormField(
+                  titleText: '予約日',
+                  validator: model.emptyValidator,
                   onSaved: (value) => model.day = value!,
                 ),
-                TextFormField(
-                  decoration: const InputDecoration(
-                    labelText: '時刻',
-                  ),
+                CustomTextFormField(
+                  titleText: '時刻',
                   onSaved: (value) => model.time = value!,
                 ),
                 const Gap(8),
@@ -60,23 +58,18 @@ class BookingApp extends StatelessWidget {
                   value: context.watch<BookingModel>().cols,
                   onChanged: (value) => model.setCols(value!),
                 ),
-                TextFormField(
-                  decoration: const InputDecoration(
-                    labelText: '名前',
-                  ),
+                CustomTextFormField(
+                  titleText: '名前',
                   onSaved: (value) => model.name = value!,
                 ),
-                TextFormField(
-                  decoration: const InputDecoration(
-                    labelText: '電話番号',
-                  ),
+                CustomTextFormField(
+                  titleText: '電話番号',
                   onSaved: (value) => model.tel = value!,
                 ),
-                TextFormField(
-                  decoration: const InputDecoration(
-                    labelText: 'メモ',
-                  ),
+                CustomTextFormField(
+                  titleText: 'メモ',
                   onSaved: (value) => model.request = value!,
+                  maxLines: 5,
                 ),
                 const Gap(8),
                 Container(

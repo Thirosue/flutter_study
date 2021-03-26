@@ -33,6 +33,13 @@ class BookingModel extends ChangeNotifier {
     notifyListeners();
   }
 
+  String? emptyValidator(dynamic value) {
+    if (value == null || value.isEmpty) {
+      return '入力してください';
+    }
+    return null;
+  }
+
   Future<void> save() async {
     print("time: $day $time, cols: $cols,"
         " name: $name, tel: $tel, request: $request");

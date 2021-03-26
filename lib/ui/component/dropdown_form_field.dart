@@ -1,4 +1,4 @@
-library dropdown_formfield;
+library dropdown_form_field;
 
 import 'package:flutter/material.dart';
 
@@ -12,7 +12,6 @@ class DropDownFormField extends FormField<dynamic> {
   final String textField;
   final String valueField;
   final Function onChanged;
-  final bool filled;
   final EdgeInsets contentPadding;
 
   DropDownFormField(
@@ -27,8 +26,7 @@ class DropDownFormField extends FormField<dynamic> {
       this.textField = 'display',
       this.valueField = 'value',
       required this.onChanged,
-      this.filled = true,
-      this.contentPadding = const EdgeInsets.fromLTRB(12, 12, 8, 0)})
+      this.contentPadding = const EdgeInsets.fromLTRB(0, 12, 0, 0)})
       : super(
           onSaved: onSaved,
           validator: validator,
@@ -42,7 +40,7 @@ class DropDownFormField extends FormField<dynamic> {
                     decoration: InputDecoration(
                       contentPadding: contentPadding,
                       labelText: titleText,
-                      filled: filled,
+                      fillColor: Colors.white,
                     ),
                     child: DropdownButtonHideUnderline(
                       child: DropdownButton<dynamic>(
