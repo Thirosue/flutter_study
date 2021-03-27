@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/route_navigate_observer.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
@@ -35,6 +36,9 @@ class App extends StatelessWidget {
     loginMiddleWare.redirect(Constants.login);
 
     return GetMaterialApp(
+      navigatorObservers: [
+        RouteNavigateObserver(),
+      ],
       initialRoute: Constants.login,
       getPages: [
         GetPage(
