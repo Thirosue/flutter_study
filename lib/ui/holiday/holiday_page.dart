@@ -4,7 +4,7 @@ import 'package:syncfusion_flutter_calendar/calendar.dart';
 
 import '../../constants.dart';
 import '../../model/calendar/schedule_data_source.dart';
-import '../../ui/component/template.dart';
+import '../component/templates/template.dart';
 import 'holiday_model.dart';
 
 class HolidayPage extends StatelessWidget {

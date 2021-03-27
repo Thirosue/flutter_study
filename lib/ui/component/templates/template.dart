@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../constants.dart';
+import '../../../constants.dart';
 
 class Template extends StatelessWidget {
   final int index;

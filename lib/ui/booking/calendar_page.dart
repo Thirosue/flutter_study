@@ -7,7 +7,7 @@ import '../../constants.dart';
 import '../../model/calendar/schedule.dart';
 import '../../model/calendar/schedule_data_source.dart';
 import '../../repository/calendar_repository.dart';
-import '../../ui/component/template.dart';
+import '../component/templates/template.dart';
 import 'calendar_model.dart';
 import 'day/day_page.dart';
 import 'register/booking_page.dart';

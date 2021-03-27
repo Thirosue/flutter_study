@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../constants.dart';
-import '../../ui/component/template.dart';
+import '../component/templates/template.dart';
 import 'setting_model.dart';
 
 class SettingPage extends StatelessWidget {

@@ -6,8 +6,8 @@ import 'package:provider/provider.dart';
 import '../../../constants.dart';
 import '../../../helpers/message_utils.dart';
 import '../../../repository/booking_repository.dart';
-import '../../../ui/component/custom_text_form_field.dart';
-import '../../../ui/component/dropdown_form_field.dart';
+import '../../component/atoms/custom_text_form_field.dart';
+import '../../component/atoms/dropdown_form_field.dart';
 import 'booking_model.dart';
 
 class BookingPage extends StatelessWidget {
