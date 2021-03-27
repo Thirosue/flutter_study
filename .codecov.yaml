@@ -31,8 +31,5 @@ comment: # See: https://docs.codecov.io/docs/pull-request-comments
   require_head: yes
 
 ignore:
-  - "lib/model/store.dart"
-  - "lib/model/tab_item.dart"
-  - "lib/model/response/**/*"
   - "**/*.g.dart"
   - "**/*.freezed.dart"
