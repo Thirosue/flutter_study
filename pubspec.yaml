@@ -36,6 +36,7 @@ dependencies:
   gap: ^2.0.0-nullsafety.1
   get: ^4.0.0-nullsafety.2
   get_storage: ^2.0.1
+  intl: ^0.17.0
   syncfusion_flutter_calendar: ^18.4.46
 
 dev_dependencies:

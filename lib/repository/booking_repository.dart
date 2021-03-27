@@ -2,6 +2,8 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 
+import '../model/calendar/booking.dart';
+
 class BookingRepository {
   static const String _baseUrl =
       'https://thirosue.github.io/hosting-image2/flutter_study';
@@ -21,7 +23,7 @@ class BookingRepository {
     responseType: ResponseType.plain,
   ));
 
-  Future<void> create() async {
+  Future<void> create(Booking booking) async {
     Response response;
     response = await dio.get(
       '/booking.post.json',

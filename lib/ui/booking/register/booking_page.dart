@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
 import '../../../constants.dart';
+import '../../../helpers/message_utils.dart';
 import '../../../repository/booking_repository.dart';
 import '../../../ui/component/custom_text_form_field.dart';
 import '../../../ui/component/dropdown_form_field.dart';
@@ -42,16 +43,73 @@ class BookingApp extends StatelessWidget {
             key: _formKey,
             child: Column(
               children: <Widget>[
-                CustomTextFormField(
-                  titleText: '予約日',
-                  validator: model.emptyValidator,
-                  onSaved: (value) => model.day = value!,
+                Container(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      InputDecorator(
+                        decoration: const InputDecoration(
+                          labelText: '予約日',
+                          fillColor: Colors.white,
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Container(
+                              width: 150,
+                              height: 32,
+                              child: Align(
+                                alignment: Alignment.bottomLeft,
+                                child: Text(
+                                  context.watch<BookingModel>().dayText,
+                                  style: const TextStyle(
+                                    fontSize: 18,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Container(
+                              width: 150,
+                              height: 32,
+                              child: Align(
+                                child: Align(
+                                  alignment: Alignment.topRight,
+                                  child: IconButton(
+                                    icon: const Icon(Icons.calendar_today),
+                                    onPressed: () => model.selectDate(context),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-                CustomTextFormField(
-                  titleText: '時刻',
-                  onSaved: (value) => model.time = value!,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Container(
+                      width: 150,
+                      child: DropDownFormField(
+                        titleText: '時間',
+                        items: model.hourItems,
+                        value: context.watch<BookingModel>().hour,
+                        onChanged: (value) => model.setHour(value!),
+                      ),
+                    ),
+                    Container(
+                      width: 150,
+                      child: DropDownFormField(
+                        titleText: '分',
+                        items: model.minuteItems,
+                        value: context.watch<BookingModel>().minute,
+                        onChanged: (value) => model.setMinute(value!),
+                      ),
+                    ),
+                  ],
                 ),
-                const Gap(8),
                 DropDownFormField(
                   titleText: '予約枠',
                   items: model.colsItems,
@@ -60,6 +118,7 @@ class BookingApp extends StatelessWidget {
                 ),
                 CustomTextFormField(
                   titleText: '名前',
+                  validator: model.emptyValidator,
                   onSaved: (value) => model.name = value!,
                 ),
                 CustomTextFormField(
@@ -69,7 +128,7 @@ class BookingApp extends StatelessWidget {
                 CustomTextFormField(
                   titleText: 'メモ',
                   onSaved: (value) => model.request = value!,
-                  maxLines: 5,
+                  maxLines: 3,
                 ),
                 const Gap(8),
                 Container(
@@ -82,6 +141,9 @@ class BookingApp extends StatelessWidget {
                           _formKey.currentState!.save();
 
                           await model.save();
+
+                          Get.back();
+                          MessageUtils.showSnackBar('予約', '予約を編集しました');
                         }
                       },
                       child: const Text('予約する'),

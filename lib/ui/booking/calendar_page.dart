@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/ui/booking/register/booking_page.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
@@ -11,6 +10,7 @@ import '../../repository/calendar_repository.dart';
 import '../../ui/component/template.dart';
 import 'calendar_model.dart';
 import 'day/day_page.dart';
+import 'register/booking_page.dart';
 
 class CalendarPage extends StatelessWidget {
   final CalendarRepository repository;
