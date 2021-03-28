@@ -8,4 +8,12 @@ class CalendarModel extends ChangeNotifier {
   DateTime selected = DateTime.now();
 
   CalendarModel(this.index, this.bookings);
+
+  static DateTime roundAtStartTime(DateTime target) => DateTime(
+        target.year,
+        target.month,
+        target.day,
+        10,
+        0,
+      );
 }

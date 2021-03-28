@@ -8,4 +8,9 @@ class MessageUtils {
       snackPosition: SnackPosition.BOTTOM,
     );
   }
+
+  static String paddingZeroByte(int target, int width) =>
+      target.toString().padLeft(width, "0");
+
+  static String paddingTimeOfDay(int target) => paddingZeroByte(target, 2);
 }

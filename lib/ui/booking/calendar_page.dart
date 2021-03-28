@@ -77,8 +77,10 @@ class CalendarApp extends StatelessWidget {
           ),
           floatingActionButton: FloatingActionButton(
             onPressed: () {
-              final day =
-                  DateTime.now().isBefore(selected) ? selected : DateTime.now();
+              final now = DateTime.now();
+              final day = now.isBefore(selected)
+                  ? CalendarModel.roundAtStartTime(selected)
+                  : CalendarModel.roundAtStartTime(now);
               Get.to(
                 () => BookingPage(),
                 arguments: day,

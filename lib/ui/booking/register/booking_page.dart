@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 import '../../../constants.dart';
@@ -14,11 +15,13 @@ class BookingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final DateTime selected = Get.arguments;
-    print(selected);
 
     return ChangeNotifierProvider(
       create: (context) => BookingModel(
-        BookingRepository(),
+        repository: BookingRepository(),
+        day: selected,
+        hour: MessageUtils.paddingTimeOfDay(selected.hour),
+        minute: MessageUtils.paddingTimeOfDay(selected.minute),
       ),
       child: BookingApp(),
     );
@@ -61,7 +64,9 @@ class BookingApp extends StatelessWidget {
                               child: Align(
                                 alignment: Alignment.bottomLeft,
                                 child: Text(
-                                  context.watch<BookingModel>().dayText,
+                                  DateFormat('yyyy-MM-dd').format(
+                                    context.watch<BookingModel>().day,
+                                  ),
                                   style: const TextStyle(
                                     fontSize: 18,
                                   ),

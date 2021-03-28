@@ -1,21 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
+import '../../../helpers/message_utils.dart';
 import '../../../model/calendar/booking.dart';
 import '../../../repository/booking_repository.dart';
 
 class BookingModel extends ChangeNotifier {
-  final BookingRepository repository;
-  DateTime day = DateTime.now();
-  String dayText = DateFormat('yyyy-MM-dd').format(DateTime.now());
-  String hour = '10';
-  String minute = '00';
+  BookingRepository repository;
+  DateTime day;
+  String hour;
+  String minute;
   int cols = 4;
   String name = '';
   String tel = '';
   String request = '';
 
-  BookingModel(this.repository);
+  BookingModel({
+    required this.repository,
+    required this.day,
+    required this.hour,
+    required this.minute,
+  });
 
   String? emptyValidator(dynamic value) {
     if (value == null || value.isEmpty) {
@@ -35,7 +40,6 @@ class BookingModel extends ChangeNotifier {
     ))!;
 
     day = picked;
-    dayText = DateFormat('yyyy-MM-dd').format(picked);
     notifyListeners();
   }
 
@@ -94,8 +98,8 @@ class BookingModel extends ChangeNotifier {
 
   final hourItems = List.generate(11, (i) => i + 10)
       .map((hour) => {
-            "display": hour.toString().padLeft(2, "0"),
-            "value": hour.toString().padLeft(2, "0"),
+            "display": MessageUtils.paddingTimeOfDay(hour),
+            "value": MessageUtils.paddingTimeOfDay(hour),
           })
       .toList();
 
