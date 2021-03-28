@@ -5,29 +5,28 @@ import 'package:syncfusion_flutter_calendar/calendar.dart';
 
 import '../../../constants.dart';
 import '../../../model/calendar/schedule_data_source.dart';
+import '../calendar_model.dart';
+import '../register/booking_page.dart';
 import 'day_model.dart';
 
 class DayPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final index = Constants.calendarIndex;
     final List arguments = Get.arguments;
     final DateTime selectDate = arguments.first;
-    final initialDisplayDate = DateTime(
-      selectDate.year,
-      selectDate.month,
-      selectDate.day,
-      9,
-      0,
-    );
 
     return ChangeNotifierProvider(
       create: (context) => DayModel(
-        index,
         arguments.last,
       ),
       child: DayApp(
-        initialDisplayDate: initialDisplayDate,
+        initialDisplayDate: DateTime(
+          selectDate.year,
+          selectDate.month,
+          selectDate.day,
+          9,
+          0,
+        ),
       ),
     );
   }
@@ -41,7 +40,6 @@ class DayApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final booking = context.watch<DayModel>().bookings;
-    var selected = context.read<DayModel>().selected;
 
     return Scaffold(
       appBar: AppBar(
@@ -59,17 +57,36 @@ class DayApp extends StatelessWidget {
           dataSource: ScheduleDataSource(
             booking,
           ),
-          onViewChanged: (details) {
-            selected = details.visibleDates.first;
-            print(selected);
-          },
-          onTap: (details) {
-            print(details.date);
+          onViewChanged: (details) =>
+              context.read<DayModel>().selected = details.visibleDates.first,
+          onLongPress: (details) {
+            var selected = details.date;
+            if (selected.hour < 10) {
+              selected = CalendarModel.roundAtStartTime(selected);
+            } else if (20 < selected.hour) {
+              selected = CalendarModel.roundAtEndTime(selected);
+            }
+            Get.to(
+              () => BookingPage(),
+              arguments: selected,
+              fullscreenDialog: true,
+            );
           },
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          final selected = context.read<DayModel>().selected;
+          final now = DateTime.now();
+          final day = now.isBefore(selected)
+              ? CalendarModel.roundAtStartTime(selected)
+              : CalendarModel.roundAtStartTime(now);
+          Get.to(
+            () => BookingPage(),
+            arguments: day,
+            fullscreenDialog: true,
+          );
+        },
         tooltip: 'Booking',
         child: const Icon(Icons.add),
       ),

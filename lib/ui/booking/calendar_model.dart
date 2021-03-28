@@ -16,4 +16,12 @@ class CalendarModel extends ChangeNotifier {
         10,
         0,
       );
+
+  static DateTime roundAtEndTime(DateTime target) => DateTime(
+        target.year,
+        target.month,
+        target.day,
+        20,
+        0,
+      );
 }
