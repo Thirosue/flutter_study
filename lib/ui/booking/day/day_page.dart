@@ -60,7 +60,7 @@ class DayApp extends StatelessWidget {
           onViewChanged: (details) =>
               context.read<DayModel>().selected = details.visibleDates.first,
           onLongPress: (details) {
-            var selected = details.date;
+            var selected = details.date!;
             if (selected.hour < 10) {
               selected = CalendarModel.roundAtStartTime(selected);
             } else if (20 < selected.hour) {

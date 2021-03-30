@@ -21,7 +21,7 @@ samples, guidance on mobile development, and a full API reference.
 ## run application
 
 ```
-$ flutter run  --no-sound-null-safety
+$ flutter run
 ```
 
 ## run test

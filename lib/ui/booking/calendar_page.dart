@@ -61,7 +61,7 @@ class CalendarApp extends StatelessWidget {
                 booking,
               ),
               onTap: (details) {
-                selected = details.date;
+                selected = details.date!;
               },
               onLongPress: (details) {
                 Get.to(

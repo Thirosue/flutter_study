@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/route_navigate_observer.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
@@ -7,6 +6,7 @@ import 'constants.dart';
 import 'repository/auth_repository.dart';
 import 'repository/calendar_repository.dart';
 import 'repository/store_repository.dart';
+import 'route_navigate_observer.dart';
 import 'ui/booking/calendar_page.dart';
 import 'ui/holiday/holiday_page.dart';
 import 'ui/local_state.dart';
