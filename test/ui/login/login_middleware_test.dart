@@ -84,7 +84,7 @@ void main() async {
         ));
 
         // when
-        target.redirect(Constants.calendar);
+        target.redirect(Constants.login);
 
         await tester.pump(Duration(seconds: 60)); // SnackBarが表示されるのを待ち合わせる
         await tester.pumpAndSettle();
@@ -127,7 +127,7 @@ void main() async {
         expect(find.byWidget(loginPage), findsOneWidget);
 
         // when
-        target.redirect(Constants.calendar);
+        target.redirect(Constants.login);
 
         await tester.pump(Duration(seconds: 60)); // SnackBarが表示されるのを待ち合わせる
         await tester.pumpAndSettle();
@@ -154,7 +154,7 @@ void main() async {
             .thenThrow(Exception('token invalid'));
 
         // when
-        target.redirect(Constants.calendar);
+        target.redirect(Constants.login);
 
         await tester.pump(Duration(seconds: 60)); // SnackBarが表示されるのを待ち合わせる
         await tester.pumpAndSettle();
