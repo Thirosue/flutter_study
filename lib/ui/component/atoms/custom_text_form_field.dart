@@ -5,18 +5,14 @@ import 'package:flutter/material.dart';
 class CustomTextFormField extends FormField<dynamic> {
   final String titleText;
   final String hintText;
-  final bool required;
-  final String errorText;
   final dynamic value;
   final int maxLines;
 
   CustomTextFormField({
     FormFieldSetter<dynamic>? onSaved,
     FormFieldValidator<dynamic>? validator,
-    this.titleText = 'Title',
+    this.titleText = '',
     this.hintText = '',
-    this.required = false,
-    this.errorText = '入力してください',
     this.value,
     this.maxLines = 1,
   }) : super(
@@ -32,6 +28,7 @@ class CustomTextFormField extends FormField<dynamic> {
                       border: InputBorder.none,
                     ),
                     child: TextFormField(
+                      initialValue: value,
                       decoration: InputDecoration(
                         hintText: hintText,
                       ),
@@ -39,7 +36,7 @@ class CustomTextFormField extends FormField<dynamic> {
                       validator: validator,
                       maxLines: maxLines,
                     ),
-                  ),
+                  )
                 ],
               ),
             );
