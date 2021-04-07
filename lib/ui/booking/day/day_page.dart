@@ -51,9 +51,6 @@ class DayApp extends StatelessWidget {
           initialDisplayDate: initialDisplayDate,
           todayHighlightColor: Colors.red,
           showNavigationArrow: true,
-          monthViewSettings: const MonthViewSettings(
-            showAgenda: true,
-          ),
           dataSource: ScheduleDataSource(
             booking,
           ),
